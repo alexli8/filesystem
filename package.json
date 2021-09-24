@@ -1,0 +1,15 @@
+{
+  "name": "Alex",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "git@github.com:alexli8/openZFS-doc.git",
+  "author": "alex <alexli_academic@163.com>",
+  "license": "MIT",
+  "devDependencies": {
+    "vuepress": "^1.8.2"
+  },
+  "scripts": {
+    "docs:dev": "vuepress dev docs",
+    "docs:build": "vuepress build docs"
+  }
+}
