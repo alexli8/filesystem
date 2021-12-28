@@ -7,20 +7,27 @@ module.exports = {
           { text: 'Lustre', link: '/lustre/' },
           { text: 'EOS', link: '/eos/' },
           { text: 'openZFS', link: '/openzfs/' },
+          { text: 'linux优化', link: '/operation/' },
         ],
-        siderbar: {
+        sidebar: {
             '/lustre/': [
-                '',
-                'intro'
+                {
+                    title: "快速上手",
+                    icon: "creative",
+                    // prefix: "get-started/",
+                    collapsable: true,
+                    children: ["","intro", "one", "two"],
+                  },
             ],
-            '/bar/': [
-                '',
-                'intro'
-            ],
-            '/lustre/': [
-                '',
-                'intro'
-            ],
+            '/operation/': [
+              {
+                  // title: "快速上手",
+                  // icon: "creative",
+                  // prefix: "get-started/",
+                  // collapsable: true,
+                  children: ["","1", "2", "3"],
+                },
+          ],
         }
       }
   }
