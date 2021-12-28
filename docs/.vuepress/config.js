@@ -25,7 +25,7 @@ module.exports = {
                   // icon: "creative",
                   // prefix: "get-started/",
                   // collapsable: true,
-                  children: ["","1", "2", "3"],
+                  children: ["","top", "ps","pidstat","vmstat","iostat"],
                 },
           ],
         }
