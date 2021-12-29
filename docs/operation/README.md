@@ -11,7 +11,6 @@
     * pidstat
     * vmstat
     * iostat
-    * dstat
     * lsof
     * perf
     * jstack
@@ -19,4 +18,5 @@
     * tcpdump
 
 * 性能优化的典型问题与处理方式
+    * CPU问题
     * IO问题
