@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>pidstat命令 | 文件系统与优化</title>
+    <meta name="generator" content="VuePress 1.8.2">
+    
+    <meta name="description" content="file system">
+    
+    <link rel="preload" href="/assets/css/0.styles.e4d8b86b.css" as="style"><link rel="preload" href="/assets/js/app.96bcb8ae.js" as="script"><link rel="preload" href="/assets/js/2.d90d4600.js" as="script"><link rel="preload" href="/assets/js/25.f56ed365.js" as="script"><link rel="prefetch" href="/assets/js/10.0a4c21d4.js"><link rel="prefetch" href="/assets/js/11.8755f828.js"><link rel="prefetch" href="/assets/js/12.d3ac89d8.js"><link rel="prefetch" href="/assets/js/13.7b12bfb9.js"><link rel="prefetch" href="/assets/js/14.91458a2c.js"><link rel="prefetch" href="/assets/js/15.a4a55f7c.js"><link rel="prefetch" href="/assets/js/16.cb296d7f.js"><link rel="prefetch" href="/assets/js/17.0183764a.js"><link rel="prefetch" href="/assets/js/18.43839f37.js"><link rel="prefetch" href="/assets/js/19.958e2149.js"><link rel="prefetch" href="/assets/js/20.3983ff30.js"><link rel="prefetch" href="/assets/js/21.d0242abd.js"><link rel="prefetch" href="/assets/js/22.de1f3e26.js"><link rel="prefetch" href="/assets/js/23.d7a7eaeb.js"><link rel="prefetch" href="/assets/js/24.d950ab98.js"><link rel="prefetch" href="/assets/js/26.dae83183.js"><link rel="prefetch" href="/assets/js/27.7850c2cc.js"><link rel="prefetch" href="/assets/js/28.2e4a185e.js"><link rel="prefetch" href="/assets/js/29.f19f5ca1.js"><link rel="prefetch" href="/assets/js/3.be8f91eb.js"><link rel="prefetch" href="/assets/js/30.13e88a8c.js"><link rel="prefetch" href="/assets/js/4.259ba147.js"><link rel="prefetch" href="/assets/js/5.6558a25a.js"><link rel="prefetch" href="/assets/js/6.0492d512.js"><link rel="prefetch" href="/assets/js/7.f0d4ae72.js"><link rel="prefetch" href="/assets/js/8.40f1f355.js"><link rel="prefetch" href="/assets/js/9.2fd27de8.js">
+    <link rel="stylesheet" href="/assets/css/0.styles.e4d8b86b.css">
+  </head>
+  <body>
+    <div id="app" data-server-rendered="true"><div class="theme-container"><header class="navbar"><div class="sidebar-button"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" viewBox="0 0 448 512" class="icon"><path fill="currentColor" d="M436 124H12c-6.627 0-12-5.373-12-12V80c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12z"></path></svg></div> <a href="/" class="home-link router-link-active"><!----> <span class="site-name">文件系统与优化</span></a> <div class="links"><div class="search-box"><input aria-label="Search" autocomplete="off" spellcheck="false" value=""> <!----></div> <nav class="nav-links can-hide"><div class="nav-item"><a href="/" class="nav-link">
+  主页
+</a></div><div class="nav-item"><a href="/operation/" class="nav-link router-link-active">
+  linux优化
+</a></div><div class="nav-item"><a href="/lustre/" class="nav-link">
+  Lustre
+</a></div><div class="nav-item"><a href="/openzfs/" class="nav-link">
+  openZFS
+</a></div><div class="nav-item"><a href="/eos/" class="nav-link">
+  EOS
+</a></div> <!----></nav></div></header> <div class="sidebar-mask"></div> <aside class="sidebar"><nav class="nav-links"><div class="nav-item"><a href="/" class="nav-link">
+  主页
+</a></div><div class="nav-item"><a href="/operation/" class="nav-link router-link-active">
+  linux优化
+</a></div><div class="nav-item"><a href="/lustre/" class="nav-link">
+  Lustre
+</a></div><div class="nav-item"><a href="/openzfs/" class="nav-link">
+  openZFS
+</a></div><div class="nav-item"><a href="/eos/" class="nav-link">
+  EOS
+</a></div> <!----></nav>  <ul class="sidebar-links"><li><section class="sidebar-group collapsable depth-0"><p class="sidebar-heading open"><span>优化分析</span> <span class="arrow down"></span></p> <ul class="sidebar-links sidebar-group-items"><li><a href="/operation/" aria-current="page" class="sidebar-link">linux优化分析</a></li><li><a href="/operation/top.html" class="sidebar-link">top命令</a></li><li><a href="/operation/ps.html" class="sidebar-link">ps命令</a></li><li><a href="/operation/pidstat.html" aria-current="page" class="active sidebar-link">pidstat命令</a><ul class="sidebar-sub-headers"></ul></li><li><a href="/operation/vmstat.html" class="sidebar-link">vmstat命令</a></li><li><a href="/operation/iostat.html" class="sidebar-link">iostat命令</a></li><li><a href="/operation/lsof.html" class="sidebar-link">lsof 命令</a></li><li><a href="/operation/perf.html" class="sidebar-link">perf命令</a></li><li><a href="/operation/problem-cpu.html" class="sidebar-link">CPU问题分析</a></li><li><a href="/operation/problem-io.html" class="sidebar-link">IO问题分析</a></li></ul></section></li></ul> </aside> <main class="page"> <div class="theme-default-content content__default"><h1 id="pidstat命令"><a href="#pidstat命令" class="header-anchor">#</a> pidstat命令</h1> <h3 id="_1-介绍"><a href="#_1-介绍" class="header-anchor">#</a> 1.介绍</h3> <p>pidstat是sysstat工具的一个命令，用于监控全部或指定进程的cpu、内存、线程、设备IO等系统资源的占用情况，linux系统如果没有这个指令则需要安装sysstat。</p> <p>pidstat首次运行时显示自系统启动开始的各项统计信息，之后运行pidstat将显示自上次运行该命令以后的统计信息。用户可以通过指定统计的次数和时间来获得所需的统计信息。</p> <h3 id="_2-命令参数"><a href="#_2-命令参数" class="header-anchor">#</a> 2.命令参数</h3> <table><thead><tr><th>参数</th> <th>含义</th></tr></thead> <tbody><tr><td>-u</td> <td>默认的参数，显示各个进程的cpu使用统计</td></tr> <tr><td>-r</td> <td>显示各个进程的内存使用统计</td></tr> <tr><td>-d</td> <td>显示各个进程的IO使用情况</td></tr> <tr><td>-p</td> <td>指定进程号</td></tr> <tr><td>-w</td> <td>显示每个进程的上下文切换情况</td></tr> <tr><td>-t</td> <td>显示选择任务的线程的统计信息外的额外信息</td></tr> <tr><td>-T { TASK</td> <td>CHILD</td></tr> <tr><td>-V</td> <td>版本号</td></tr> <tr><td>-h</td> <td>在一行上显示了所有活动，这样其他程序可以容易解析。</td></tr> <tr><td>-I</td> <td>在SMP环境，表示任务的CPU使用率/内核数量</td></tr> <tr><td>-l</td> <td>显示命令名和所有参数</td></tr></tbody></table> <h3 id="_3-使用实例"><a href="#_3-使用实例" class="header-anchor">#</a> 3.使用实例</h3> <h4 id="_1-查看所有进程的-cpu-使用情况"><a href="#_1-查看所有进程的-cpu-使用情况" class="header-anchor">#</a> 1.查看所有进程的  CPU 使用情况</h4> <p>在测试服务上执行:</p> <div class="language- extra-class"><pre class="language-text"><code>[root@node14 ~]# pidstat -u -p ALL
+</code></pre></div><p>可以看到以下输出:</p> <div class="language- extra-class"><pre class="language-text"><code>Linux 3.10.0-1160.25.1.el7_lustre.x86_64 (node13.domain.cn)     12/29/2021      _x86_64_        (48 CPU)
+
+01:47:35 PM   UID       PID    %usr %system  %guest    %CPU   CPU  Command
+01:47:35 PM     0         1    0.01    0.01    0.00    0.02    21  systemd
+01:47:35 PM     0         2    0.00    0.00    0.00    0.00    14  kthreadd
+01:47:35 PM     0         4    0.00    0.00    0.00    0.00     0  kworker/0:0H
+01:47:35 PM     0         5    0.00    0.00    0.00    0.00    21  kworker/u96:0
+01:47:35 PM     0         6    0.00    0.00    0.00    0.00     0  ksoftirqd/0
+01:47:35 PM     0         7    0.00    0.00    0.00    0.00     0  migration/0
+01:47:35 PM     0         8    0.00    0.00    0.00    0.00     0  rcu_bh
+01:47:35 PM     0         9    0.00    0.01    0.00    0.01    37  rcu_sched
+01:47:35 PM     0        10    0.00    0.00    0.00    0.00     0  lru-add-drain
+01:47:35 PM     0        11    0.00    0.00    0.00    0.00     0  watchdog/0
+01:47:35 PM     0        12    0.00    0.00    0.00    0.00     1  watchdog/1
+01:47:35 PM     0        13    0.00    0.00    0.00    0.00     1  migration/1
+01:47:35 PM     0        14    0.00    0.00    0.00    0.00     1  ksoftirqd/1
+01:47:35 PM     0        16    0.00    0.00    0.00    0.00     1  kworker/1:0H
+01:47:35 PM     0        17    0.00    0.00    0.00    0.00     9  kworker/u97:0
+01:47:35 PM     0        18    0.00    0.00    0.00    0.00     2  watchdog/2
+01:47:35 PM     0        19    0.00    0.00    0.00    0.00     2  migration/2
+01:47:35 PM     0        20    0.00    0.00    0.00    0.00     2  ksoftirqd/2
+
+</code></pre></div><h4 id="输出说明"><a href="#输出说明" class="header-anchor">#</a> 输出说明</h4> <table><thead><tr><th>信息</th> <th>含义</th></tr></thead> <tbody><tr><td>PID</td> <td>进程ID</td></tr> <tr><td>%usr</td> <td>进程在用户空间占用cpu的百分比</td></tr> <tr><td>%system</td> <td>进程在内核空间占用cpu的百分比</td></tr> <tr><td>%guest</td> <td>进程在虚拟机占用cpu的百分比</td></tr> <tr><td>%CPU</td> <td>进程占用cpu的百分比</td></tr> <tr><td>CPU</td> <td>处理进程的cpu编号</td></tr> <tr><td>Command</td> <td>当前进程对应的命令</td></tr></tbody></table> <h4 id="_2-内存使用情况统计"><a href="#_2-内存使用情况统计" class="header-anchor">#</a> 2.内存使用情况统计</h4> <p>在测试服务上执行:</p> <div class="language- extra-class"><pre class="language-text"><code>[root@node14 ~]# pidstat -r
+</code></pre></div><p>可以看到以下输出:</p> <div class="language- extra-class"><pre class="language-text"><code>Linux 3.10.0-1160.25.1.el7_lustre.x86_64 (node13.domain.cn)     12/29/2021      _x86_64_        (48 CPU)
+
+01:55:23 PM   UID       PID  minflt/s  majflt/s     VSZ    RSS   %MEM  Command
+01:55:23 PM     0         1      0.61      0.00   51824   4068   0.00  systemd
+01:55:23 PM     0       903      0.92      0.00  174388 101368   0.10  systemd-journal
+01:55:23 PM     0       918      0.00      0.00  272304   3468   0.00  lvmetad
+01:55:23 PM     0       954      0.00      0.00   45592   2440   0.00  systemd-udevd
+01:55:23 PM     0      1297      0.00      0.00   55532   1088   0.00  auditd
+01:55:23 PM     0      1333      0.00      0.00   90568   3268   0.00  rngd
+01:55:23 PM    81      1358      0.01      0.00   58232   2400   0.00  dbus-daemon
+01:55:23 PM     0      1374      1.40      0.00   21936   1540   0.00  irqbalance
+01:55:23 PM    32      1390      0.00      0.00   69280   1004   0.00  rpcbind
+01:55:23 PM     0      1396      0.16      0.00   26384   1784   0.00  systemd-logind
+01:55:23 PM   999      1404      0.00      0.00  612248  11248   0.01  polkitd
+01:55:23 PM    38      1569      0.00      0.00   25732   1968   0.00  ntpd
+01:55:23 PM     0      1570      0.00      0.00  201428   1260   0.00  gssproxy
+01:55:23 PM     0      1580      0.00      0.00   25908    944   0.00  atd
+01:55:23 PM     0      1581      0.20      0.00  126388   1608   0.00  crond
+01:55:23 PM     0      1586      0.00      0.00  110204    848   0.00  agetty
+01:55:23 PM     0      1671      0.00      0.00  112924   4380   0.00  sshd
+01:55:23 PM     0      1672      0.01      0.00  574296  17548   0.02  tuned
+
+</code></pre></div><h4 id="输出说明-2"><a href="#输出说明-2" class="header-anchor">#</a> 输出说明</h4> <table><thead><tr><th>信息</th> <th>含义</th></tr></thead> <tbody><tr><td>PID</td> <td>进程标识符</td></tr> <tr><td>Minflt/s</td> <td>任务每秒发生的次要错误，不需要从磁盘中加载页</td></tr> <tr><td>Majflt/s</td> <td>任务每秒发生的主要错误，需要从磁盘中加载页</td></tr> <tr><td>VSZ</td> <td>虚拟地址大小，虚拟内存的使用KB</td></tr> <tr><td>RSS</td> <td>常驻集合大小，非交换区五里内存使用KB</td></tr> <tr><td>Command</td> <td>task命令名</td></tr></tbody></table> <h4 id="_3-显示各个进程的io使用情况"><a href="#_3-显示各个进程的io使用情况" class="header-anchor">#</a> 3.显示各个进程的IO使用情况</h4> <p>在测试服务上执行:</p> <div class="language- extra-class"><pre class="language-text"><code>[root@node14 ~]# pidstat -d
+</code></pre></div><p>可以看到以下输出:</p> <div class="language- extra-class"><pre class="language-text"><code>Linux 3.10.0-1160.25.1.el7_lustre.x86_64 (node13.domain.cn)     12/29/2021      _x86_64_        (48 CPU)
+
+01:57:32 PM   UID       PID   kB_rd/s   kB_wr/s kB_ccwr/s  Command
+01:57:32 PM     0         1      0.16      0.22      0.08  systemd
+01:57:32 PM     0        17      0.00      0.00      0.00  kworker/u97:0
+01:57:32 PM     0       780      0.00      0.00      0.00  kworker/u97:2
+01:57:32 PM     0       818      0.00      0.00      0.00  xfsaild/dm-0
+01:57:32 PM     0       903      0.00      0.00      0.00  systemd-journal
+01:57:32 PM     0       954      0.00      0.00      0.00  systemd-udevd
+01:57:32 PM     0      1297      0.00      0.06      0.00  auditd
+01:57:32 PM     0      1333      0.00      0.00      0.00  rngd
+01:57:32 PM   999      1404      0.00      0.00      0.00  polkitd
+01:57:32 PM    38      1569      0.00      0.00      0.00  ntpd
+01:57:32 PM     0      1570      0.00      0.00      0.00  gssproxy
+01:57:32 PM     0      1581      0.00      0.05      0.00  crond
+01:57:32 PM     0      1671      0.00      0.00      0.00  sshd
+01:57:32 PM     0      1672      0.00      0.00      0.00  tuned
+01:57:32 PM     0      1674      0.00      0.00      0.00  condor_master
+</code></pre></div><h4 id="输出说明-3"><a href="#输出说明-3" class="header-anchor">#</a> 输出说明</h4> <table><thead><tr><th>信息</th> <th>含义</th></tr></thead> <tbody><tr><td>PID</td> <td>进程id</td></tr> <tr><td>kB_rd/s</td> <td>每秒从磁盘读取的KB</td></tr> <tr><td>kB_wr/s</td> <td>每秒写入磁盘KB</td></tr> <tr><td>kB_ccwr/s</td> <td>任务取消的写入磁盘的KB。当任务截断脏的pagecache的时候会发生。</td></tr> <tr><td>COMMAND</td> <td>task的命令名</td></tr></tbody></table> <h4 id="_4-显示每个进程的上下文切换情况"><a href="#_4-显示每个进程的上下文切换情况" class="header-anchor">#</a> 4.显示每个进程的上下文切换情况</h4> <p>在测试服务上执行:</p> <div class="language- extra-class"><pre class="language-text"><code>[root@node14 ~]# pidstat -w
+</code></pre></div><p>可以看到以下输出:</p> <div class="language- extra-class"><pre class="language-text"><code>Linux 3.10.0-1160.25.1.el7_lustre.x86_64 (node13.domain.cn)     12/29/2021      _x86_64_        (48 CPU)
+
+01:58:37 PM   UID       PID   cswch/s nvcswch/s  Command
+01:58:37 PM     0         1      1.18      0.04  systemd
+01:58:37 PM     0         2      0.01      0.00  kthreadd
+01:58:37 PM     0         4      0.00      0.00  kworker/0:0H
+01:58:37 PM     0         5      0.00      0.00  kworker/u96:0
+01:58:37 PM     0         6      0.50      0.00  ksoftirqd/0
+01:58:37 PM     0         7      0.00      0.00  migration/0
+01:58:37 PM     0         8      0.00      0.00  rcu_bh
+01:58:37 PM     0         9      4.75      0.00  rcu_sched
+01:58:37 PM     0        10      0.00      0.00  lru-add-drain
+01:58:37 PM     0        11      0.25      0.00  watchdog/0
+01:58:37 PM     0        12      0.25      0.00  watchdog/1
+01:58:37 PM     0        13      0.00      0.00  migration/1
+01:58:37 PM     0        14      0.00      0.00  ksoftirqd/1
+01:58:37 PM     0        16      0.00      0.00  kworker/1:0H
+
+</code></pre></div><h4 id="输出说明-4"><a href="#输出说明-4" class="header-anchor">#</a> 输出说明</h4> <table><thead><tr><th>信息</th> <th>含义</th></tr></thead> <tbody><tr><td>PID</td> <td>进程id</td></tr> <tr><td>Cswch/s</td> <td>每秒主动任务上下文切换数量</td></tr> <tr><td>Nvcswch/s</td> <td>每秒被动任务上下文切换数量</td></tr> <tr><td>Command</td> <td>命令名</td></tr></tbody></table> <h4 id="_5-显示选择任务的线程的统计信息外的额外信息"><a href="#_5-显示选择任务的线程的统计信息外的额外信息" class="header-anchor">#</a> 5.显示选择任务的线程的统计信息外的额外信息</h4> <p>在测试服务上执行:</p> <div class="language- extra-class"><pre class="language-text"><code>[root@node14 ~]# pidstat -t
+</code></pre></div><p>可以看到以下输出:</p> <div class="language- extra-class"><pre class="language-text"><code>Linux 3.10.0-1160.25.1.el7_lustre.x86_64 (node13.domain.cn)     12/29/2021      _x86_64_        (48 CPU)
+
+02:01:09 PM   UID      TGID       TID    %usr %system  %guest    %CPU   CPU  Command
+02:01:09 PM     0         1         -    0.01    0.01    0.00    0.02    21  systemd
+02:01:09 PM     0         -         1    0.01    0.01    0.00    0.01    21  |__systemd
+02:01:09 PM     0         2         -    0.00    0.00    0.00    0.00    14  kthreadd
+02:01:09 PM     0         -         2    0.00    0.00    0.00    0.00    14  |__kthreadd
+02:01:09 PM     0         5         -    0.00    0.00    0.00    0.00    21  kworker/u96:0
+02:01:09 PM     0         -         5    0.00    0.00    0.00    0.00    21  |__kworker/u96:0
+02:01:09 PM     0         6         -    0.00    0.00    0.00    0.00     0  ksoftirqd/0
+02:01:09 PM     0         -         6    0.00    0.00    0.00    0.00     0  |__ksoftirqd/0
+02:01:09 PM     0         7         -    0.00    0.00    0.00    0.00     0  migration/0
+02:01:09 PM     0         -         7    0.00    0.00    0.00    0.00     0  |__migration/0
+02:01:09 PM     0         9         -    0.00    0.01    0.00    0.01    11  rcu_sched
+02:01:09 PM     0         -         9    0.00    0.01    0.00    0.01    11  |__rcu_sched
+02:01:09 PM     0        11         -    0.00    0.00    0.00    0.00     0  watchdog/0
+02:01:09 PM     0         -        11    0.00    0.00    0.00    0.00     0  |__watchdog/0
+02:01:09 PM     0        12         -    0.00    0.00    0.00    0.00     1  watchdog/1
+02:01:09 PM     0         -        12    0.00    0.00    0.00    0.00     1  |__watchdog/1
+02:01:09 PM     0        13         -    0.00    0.00    0.00    0.00     1  migration/1
+
+</code></pre></div><h4 id="输出说明-5"><a href="#输出说明-5" class="header-anchor">#</a> 输出说明</h4> <table><thead><tr><th>信息</th> <th>含义</th></tr></thead> <tbody><tr><td>TGID</td> <td>主线程的表示</td></tr> <tr><td>TID</td> <td>线程id</td></tr> <tr><td>%usr</td> <td>进程在用户空间占用cpu的百分比</td></tr> <tr><td>%system</td> <td>进程在内核空间占用cpu的百分比</td></tr> <tr><td>%guest</td> <td>进程在虚拟机占用cpu的百分比</td></tr> <tr><td>%CPU</td> <td>进程占用cpu的百分比</td></tr> <tr><td>CPU</td> <td>处理进程的cpu编号</td></tr> <tr><td>Command</td> <td>当前进程对应的命令</td></tr></tbody></table> <p>实例1：显示所有设备负载情况</p></div> <footer class="page-edit"><!----> <!----></footer> <div class="page-nav"><p class="inner"><span class="prev">
+      ←
+      <a href="/operation/ps.html" class="prev">
+        ps命令
+      </a></span> <span class="next"><a href="/operation/vmstat.html">
+        vmstat命令
+      </a>
+      →
+    </span></p></div> </main></div><div class="global-ui"></div></div>
+    <script src="/assets/js/app.96bcb8ae.js" defer></script><script src="/assets/js/2.d90d4600.js" defer></script><script src="/assets/js/25.f56ed365.js" defer></script>
+  </body>
+</html>

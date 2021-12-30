@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>ps命令 | 文件系统与优化</title>
+    <meta name="generator" content="VuePress 1.8.2">
+    
+    <meta name="description" content="file system">
+    
+    <link rel="preload" href="/assets/css/0.styles.e4d8b86b.css" as="style"><link rel="preload" href="/assets/js/app.96bcb8ae.js" as="script"><link rel="preload" href="/assets/js/2.d90d4600.js" as="script"><link rel="preload" href="/assets/js/27.7850c2cc.js" as="script"><link rel="prefetch" href="/assets/js/10.0a4c21d4.js"><link rel="prefetch" href="/assets/js/11.8755f828.js"><link rel="prefetch" href="/assets/js/12.d3ac89d8.js"><link rel="prefetch" href="/assets/js/13.7b12bfb9.js"><link rel="prefetch" href="/assets/js/14.91458a2c.js"><link rel="prefetch" href="/assets/js/15.a4a55f7c.js"><link rel="prefetch" href="/assets/js/16.cb296d7f.js"><link rel="prefetch" href="/assets/js/17.0183764a.js"><link rel="prefetch" href="/assets/js/18.43839f37.js"><link rel="prefetch" href="/assets/js/19.958e2149.js"><link rel="prefetch" href="/assets/js/20.3983ff30.js"><link rel="prefetch" href="/assets/js/21.d0242abd.js"><link rel="prefetch" href="/assets/js/22.de1f3e26.js"><link rel="prefetch" href="/assets/js/23.d7a7eaeb.js"><link rel="prefetch" href="/assets/js/24.d950ab98.js"><link rel="prefetch" href="/assets/js/25.f56ed365.js"><link rel="prefetch" href="/assets/js/26.dae83183.js"><link rel="prefetch" href="/assets/js/28.2e4a185e.js"><link rel="prefetch" href="/assets/js/29.f19f5ca1.js"><link rel="prefetch" href="/assets/js/3.be8f91eb.js"><link rel="prefetch" href="/assets/js/30.13e88a8c.js"><link rel="prefetch" href="/assets/js/4.259ba147.js"><link rel="prefetch" href="/assets/js/5.6558a25a.js"><link rel="prefetch" href="/assets/js/6.0492d512.js"><link rel="prefetch" href="/assets/js/7.f0d4ae72.js"><link rel="prefetch" href="/assets/js/8.40f1f355.js"><link rel="prefetch" href="/assets/js/9.2fd27de8.js">
+    <link rel="stylesheet" href="/assets/css/0.styles.e4d8b86b.css">
+  </head>
+  <body>
+    <div id="app" data-server-rendered="true"><div class="theme-container"><header class="navbar"><div class="sidebar-button"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" viewBox="0 0 448 512" class="icon"><path fill="currentColor" d="M436 124H12c-6.627 0-12-5.373-12-12V80c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12z"></path></svg></div> <a href="/" class="home-link router-link-active"><!----> <span class="site-name">文件系统与优化</span></a> <div class="links"><div class="search-box"><input aria-label="Search" autocomplete="off" spellcheck="false" value=""> <!----></div> <nav class="nav-links can-hide"><div class="nav-item"><a href="/" class="nav-link">
+  主页
+</a></div><div class="nav-item"><a href="/operation/" class="nav-link router-link-active">
+  linux优化
+</a></div><div class="nav-item"><a href="/lustre/" class="nav-link">
+  Lustre
+</a></div><div class="nav-item"><a href="/openzfs/" class="nav-link">
+  openZFS
+</a></div><div class="nav-item"><a href="/eos/" class="nav-link">
+  EOS
+</a></div> <!----></nav></div></header> <div class="sidebar-mask"></div> <aside class="sidebar"><nav class="nav-links"><div class="nav-item"><a href="/" class="nav-link">
+  主页
+</a></div><div class="nav-item"><a href="/operation/" class="nav-link router-link-active">
+  linux优化
+</a></div><div class="nav-item"><a href="/lustre/" class="nav-link">
+  Lustre
+</a></div><div class="nav-item"><a href="/openzfs/" class="nav-link">
+  openZFS
+</a></div><div class="nav-item"><a href="/eos/" class="nav-link">
+  EOS
+</a></div> <!----></nav>  <ul class="sidebar-links"><li><section class="sidebar-group collapsable depth-0"><p class="sidebar-heading open"><span>优化分析</span> <span class="arrow down"></span></p> <ul class="sidebar-links sidebar-group-items"><li><a href="/operation/" aria-current="page" class="sidebar-link">linux优化分析</a></li><li><a href="/operation/top.html" class="sidebar-link">top命令</a></li><li><a href="/operation/ps.html" aria-current="page" class="active sidebar-link">ps命令</a><ul class="sidebar-sub-headers"></ul></li><li><a href="/operation/pidstat.html" class="sidebar-link">pidstat命令</a></li><li><a href="/operation/vmstat.html" class="sidebar-link">vmstat命令</a></li><li><a href="/operation/iostat.html" class="sidebar-link">iostat命令</a></li><li><a href="/operation/lsof.html" class="sidebar-link">lsof 命令</a></li><li><a href="/operation/perf.html" class="sidebar-link">perf命令</a></li><li><a href="/operation/problem-cpu.html" class="sidebar-link">CPU问题分析</a></li><li><a href="/operation/problem-io.html" class="sidebar-link">IO问题分析</a></li></ul></section></li></ul> </aside> <main class="page"> <div class="theme-default-content content__default"><h1 id="ps命令"><a href="#ps命令" class="header-anchor">#</a> ps命令</h1> <h3 id="_1-介绍"><a href="#_1-介绍" class="header-anchor">#</a> 1.介绍</h3> <p>要对进程进行监测和控制,首先必须要了解当前进程的情况,也就是需要查看当前进程,ps命令就是最基本进程查看命令。使用该命令可以确定有哪些进程正在运行和运行的状态、进程是否结束、进程有没有僵尸、哪些进程占用了过多的资源等等.总之大部分信息都是可以通过执行该命令得到。</p> <h4 id="ps是显示瞬间进程的状态-并不动态连续-如果想对进程进行实时监控应该用top命令。"><a href="#ps是显示瞬间进程的状态-并不动态连续-如果想对进程进行实时监控应该用top命令。" class="header-anchor">#</a> ps是显示瞬间进程的状态，并不动态连续；如果想对进程进行实时监控应该用top命令。</h4> <h3 id="_2-命令参数"><a href="#_2-命令参数" class="header-anchor">#</a> 2.命令参数</h3> <table><thead><tr><th>参数</th> <th>含义</th></tr></thead> <tbody><tr><td>-A</td> <td>所有的进程均显示出来，与 -e 具有同样的效用；</td></tr> <tr><td>-a</td> <td>显示现行终端机下的所有进程，包括其他用户的进程；</td></tr> <tr><td>-u</td> <td>以用户为主的进程状态 ；</td></tr> <tr><td>x</td> <td>通常与 a 这个参数一起使用，可列出较完整信息；</td></tr> <tr><td>l</td> <td>较长、较详细的将该PID 的的信息列出；</td></tr> <tr><td>j</td> <td>工作的格式 (jobs format)</td></tr> <tr><td>-f</td> <td>做一个更为完整的输出。</td></tr></tbody></table> <h4 id="特别说明-由于-ps-能够支持的系统类型相当的多-所以参数很多-而且有没有加上-差别很多-以下只分析两个常用参数。"><a href="#特别说明-由于-ps-能够支持的系统类型相当的多-所以参数很多-而且有没有加上-差别很多-以下只分析两个常用参数。" class="header-anchor">#</a> 特别说明：由于 ps 能够支持的系统类型相当的多，所以参数很多，而且有没有加上 - 差别很多，以下只分析两个常用参数。</h4> <h3 id="_3-使用实例"><a href="#_3-使用实例" class="header-anchor">#</a> 3.使用实例</h3> <h4 id="_1-将目前属于您自己这次登入的-pid-与相关信息列示出来"><a href="#_1-将目前属于您自己这次登入的-pid-与相关信息列示出来" class="header-anchor">#</a> 1. 将目前属于您自己这次登入的 PID 与相关信息列示出来</h4> <p>在测试服务上执行:</p> <div class="language- extra-class"><pre class="language-text"><code>[root@node14 ~]# ps -l
+</code></pre></div><p>可以看到以下输出:</p> <div class="language- extra-class"><pre class="language-text"><code>F S   UID   PID  PPID  C PRI  NI ADDR SZ WCHAN  TTY          TIME CMD
+4 S     0  2822  2820  0  80   0 - 28911 do_wai pts/0    00:00:00 bash
+0 R     0  4174  2822  0  80   0 - 38337 -      pts/0    00:00:00 ps
+</code></pre></div><h4 id="输出说明"><a href="#输出说明" class="header-anchor">#</a> 输出说明:</h4> <table><thead><tr><th>信息</th> <th>含义</th></tr></thead> <tbody><tr><td>F</td> <td>代表这个程序的旗标 (flag)， 4 代表使用者为 superuser；</td></tr> <tr><td>S</td> <td>代表这个程序的状态 (STAT)；</td></tr> <tr><td>UID</td> <td>代表执行者身份</td></tr> <tr><td>PID</td> <td>进程的ID号！</td></tr> <tr><td>PPID</td> <td>父进程的ID；</td></tr> <tr><td>C</td> <td>CPU使用的资源百分比</td></tr> <tr><td>PRI</td> <td>指进程的执行优先权(Priority的简写)，其值越小越早被执行；</td></tr> <tr><td>NI</td> <td>这个进程的nice值，其表示进程可被执行的优先级的修正数值；</td></tr> <tr><td>ADDR</td> <td>这个是内核函数，指出该程序在内存的那个部分。如果是个执行 的程序，一般就是『 - 』</td></tr> <tr><td>SZ</td> <td>使用掉的内存大小；</td></tr> <tr><td>WCHAN</td> <td>目前这个程序是否正在运作当中，若为 - 表示正在运作；</td></tr> <tr><td>TTY</td> <td>登入者的终端机位置；</td></tr> <tr><td>TIME</td> <td>使用掉的 CPU 时间；</td></tr> <tr><td>CMD</td> <td>所下达的指令名称；</td></tr></tbody></table> <h4 id="_2-列出目前所有的正在内存当中的程序"><a href="#_2-列出目前所有的正在内存当中的程序" class="header-anchor">#</a> 2.列出目前所有的正在内存当中的程序</h4> <p>在测试服务上执行:</p> <div class="language- extra-class"><pre class="language-text"><code>[root@node14 ~]# ps aux
+</code></pre></div><p>可以看到以下输出:</p> <div class="language- extra-class"><pre class="language-text"><code>USER       PID %CPU %MEM    VSZ   RSS TTY      STAT START   TIME COMMAND
+root         1  0.0  0.0  51824  4068 ?        Ss   Nov22  12:05 /usr/lib/systemd/systemd --switched-root --system --deserialize 22
+root         2  0.0  0.0      0     0 ?        S    Nov22   0:00 [kthreadd]
+root         4  0.0  0.0      0     0 ?        S&lt;   Nov22   0:00 [kworker/0:0H]
+root         5  0.0  0.0      0     0 ?        S    Nov22   0:00 [kworker/u96:0]
+root         6  0.0  0.0      0     0 ?        S    Nov22   0:18 [ksoftirqd/0]
+root         7  0.0  0.0      0     0 ?        S    Nov22   0:00 [migration/0]
+root         8  0.0  0.0      0     0 ?        S    Nov22   0:00 [rcu_bh]
+root         9  0.0  0.0      0     0 ?        S    Nov22   4:15 [rcu_sched]
+root        10  0.0  0.0      0     0 ?        S&lt;   Nov22   0:00 [lru-add-drain]
+root        11  0.0  0.0      0     0 ?        S    Nov22   0:09 [watchdog/0]
+root        12  0.0  0.0      0     0 ?        S    Nov22   0:08 [watchdog/1]
+root        13  0.0  0.0      0     0 ?        S    Nov22   0:00 [migration/1]
+root        14  0.0  0.0      0     0 ?        S    Nov22   0:00 [ksoftirqd/1]
+root        16  0.0  0.0      0     0 ?        S&lt;   Nov22   0:00 [kworker/1:0H]
+
+</code></pre></div><h4 id="输出说明-2"><a href="#输出说明-2" class="header-anchor">#</a> 输出说明:</h4> <table><thead><tr><th>信息</th> <th>含义</th></tr></thead> <tbody><tr><td>USER</td> <td>该进程属于那个使用者账号。</td></tr> <tr><td>PID</td> <td>该进程的进程ID号。</td></tr> <tr><td>%CPU</td> <td>该进程使用掉的 CPU 资源百分比；</td></tr> <tr><td>%MEM</td> <td>该进程所占用的物理内存百分比；</td></tr> <tr><td>VSZ</td> <td>该进程使用掉的虚拟内存量 (Kbytes)</td></tr> <tr><td>RSS</td> <td>该进程占用的固定的内存量 (Kbytes)</td></tr> <tr><td>TTY</td> <td>该进程是在那个终端机上面运作，若与终端机无关，则显示 ?。另外， tty1-tty6 是本机上面的登入者程序，若为 pts/0 等等的，则表示为由网络连接进主机的程序。</td></tr> <tr><td>STAT</td> <td>该程序目前的状态，主要的状态有：</td></tr> <tr><td>R</td> <td>该程序目前正在运作，或者是可被运作；</td></tr> <tr><td>S</td> <td>该程序目前正在睡眠当中，但可被某些讯号(signal) 唤醒。</td></tr> <tr><td>T</td> <td>该程序目前正在侦测或者是停止了；</td></tr> <tr><td>Z</td> <td>该程序应该已经终止，但是其父程序却无法正常的终止他，造成 zombie (疆尸) 程序的状态</td></tr> <tr><td>START</td> <td>该进程被触发启动的时间；</td></tr> <tr><td>TIME</td> <td>该进程实际使用 CPU 运作的时间。</td></tr> <tr><td>COMMAND</td> <td>该程序的实际指令。</td></tr></tbody></table></div> <footer class="page-edit"><!----> <!----></footer> <div class="page-nav"><p class="inner"><span class="prev">
+      ←
+      <a href="/operation/top.html" class="prev">
+        top命令
+      </a></span> <span class="next"><a href="/operation/pidstat.html">
+        pidstat命令
+      </a>
+      →
+    </span></p></div> </main></div><div class="global-ui"></div></div>
+    <script src="/assets/js/app.96bcb8ae.js" defer></script><script src="/assets/js/2.d90d4600.js" defer></script><script src="/assets/js/27.7850c2cc.js" defer></script>
+  </body>
+</html>

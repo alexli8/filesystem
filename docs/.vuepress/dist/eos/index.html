@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>EOS | 文件系统与优化</title>
+    <meta name="generator" content="VuePress 1.8.2">
+    
+    <meta name="description" content="file system">
+    
+    <link rel="preload" href="/assets/css/0.styles.e4d8b86b.css" as="style"><link rel="preload" href="/assets/js/app.96bcb8ae.js" as="script"><link rel="preload" href="/assets/js/2.d90d4600.js" as="script"><link rel="preload" href="/assets/js/10.0a4c21d4.js" as="script"><link rel="prefetch" href="/assets/js/11.8755f828.js"><link rel="prefetch" href="/assets/js/12.d3ac89d8.js"><link rel="prefetch" href="/assets/js/13.7b12bfb9.js"><link rel="prefetch" href="/assets/js/14.91458a2c.js"><link rel="prefetch" href="/assets/js/15.a4a55f7c.js"><link rel="prefetch" href="/assets/js/16.cb296d7f.js"><link rel="prefetch" href="/assets/js/17.0183764a.js"><link rel="prefetch" href="/assets/js/18.43839f37.js"><link rel="prefetch" href="/assets/js/19.958e2149.js"><link rel="prefetch" href="/assets/js/20.3983ff30.js"><link rel="prefetch" href="/assets/js/21.d0242abd.js"><link rel="prefetch" href="/assets/js/22.de1f3e26.js"><link rel="prefetch" href="/assets/js/23.d7a7eaeb.js"><link rel="prefetch" href="/assets/js/24.d950ab98.js"><link rel="prefetch" href="/assets/js/25.f56ed365.js"><link rel="prefetch" href="/assets/js/26.dae83183.js"><link rel="prefetch" href="/assets/js/27.7850c2cc.js"><link rel="prefetch" href="/assets/js/28.2e4a185e.js"><link rel="prefetch" href="/assets/js/29.f19f5ca1.js"><link rel="prefetch" href="/assets/js/3.be8f91eb.js"><link rel="prefetch" href="/assets/js/30.13e88a8c.js"><link rel="prefetch" href="/assets/js/4.259ba147.js"><link rel="prefetch" href="/assets/js/5.6558a25a.js"><link rel="prefetch" href="/assets/js/6.0492d512.js"><link rel="prefetch" href="/assets/js/7.f0d4ae72.js"><link rel="prefetch" href="/assets/js/8.40f1f355.js"><link rel="prefetch" href="/assets/js/9.2fd27de8.js">
+    <link rel="stylesheet" href="/assets/css/0.styles.e4d8b86b.css">
+  </head>
+  <body>
+    <div id="app" data-server-rendered="true"><div class="theme-container no-sidebar"><header class="navbar"><div class="sidebar-button"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" viewBox="0 0 448 512" class="icon"><path fill="currentColor" d="M436 124H12c-6.627 0-12-5.373-12-12V80c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12z"></path></svg></div> <a href="/" class="home-link router-link-active"><!----> <span class="site-name">文件系统与优化</span></a> <div class="links"><div class="search-box"><input aria-label="Search" autocomplete="off" spellcheck="false" value=""> <!----></div> <nav class="nav-links can-hide"><div class="nav-item"><a href="/" class="nav-link">
+  主页
+</a></div><div class="nav-item"><a href="/operation/" class="nav-link">
+  linux优化
+</a></div><div class="nav-item"><a href="/lustre/" class="nav-link">
+  Lustre
+</a></div><div class="nav-item"><a href="/openzfs/" class="nav-link">
+  openZFS
+</a></div><div class="nav-item"><a href="/eos/" aria-current="page" class="nav-link router-link-exact-active router-link-active">
+  EOS
+</a></div> <!----></nav></div></header> <div class="sidebar-mask"></div> <aside class="sidebar"><nav class="nav-links"><div class="nav-item"><a href="/" class="nav-link">
+  主页
+</a></div><div class="nav-item"><a href="/operation/" class="nav-link">
+  linux优化
+</a></div><div class="nav-item"><a href="/lustre/" class="nav-link">
+  Lustre
+</a></div><div class="nav-item"><a href="/openzfs/" class="nav-link">
+  openZFS
+</a></div><div class="nav-item"><a href="/eos/" aria-current="page" class="nav-link router-link-exact-active router-link-active">
+  EOS
+</a></div> <!----></nav>  <!----> </aside> <main class="page"> <div class="theme-default-content content__default"><h2 id="eos"><a href="#eos" class="header-anchor">#</a> EOS</h2> <h3 id="准备工作"><a href="#准备工作" class="header-anchor">#</a> 准备工作</h3> <p>首先安装docker</p> <div class="language- extra-class"><pre class="language-text"><code># yum install docker
+# systemctl start docker
+</code></pre></div><h3 id="在docker里运行eos"><a href="#在docker里运行eos" class="header-anchor">#</a> 在docker里运行EOS</h3> <div class="language- extra-class"><pre class="language-text"><code># git clone https://gitlab.cern.ch/eos/eos-docker.git
+# cd eos-docker
+# scripts/start_services.sh -i gitlab-registry.cern.ch/dss/eos:4.8.39 -n 6
+</code></pre></div><p>要启动一个具有 6 个存储服务器 (FST)、1 个命名空间服务器 (MGM)、1 个消息传递程序 (MQ)、1 个客户端和 1 个 Kerberos KDC 容器的小型实例，只需使用 start_services 脚本即可。</p> <p>要提供的参数是要与 -i 一起使用的映像的名称以及带有 -n 标志的 FST 容器的数量（默认为 6）。</p> <p>容器将驻留在同一个网络上，了解并配置为开箱即用。</p> <p>使用在 MGM 容器中运行的 eos shell CLI 连接到 EOS。</p> <div class="language- extra-class"><pre class="language-text"><code># docker exec -i eos-mgm1 eos
+# EOS Console [root://localhost] |/&gt; whoami
+whoami
+Virtual Identity: uid=0 (2,99,3,0) gid=0 (99,4,0) [authz:sss] sudo* host=localhost
+# EOS Console [root://localhost] |/&gt; version
+version
+EOS_INSTANCE=eosdockertest
+EOS_SERVER_VERSION=4.8.39 EOS_SERVER_RELEASE=1
+EOS_CLIENT_VERSION=4.8.39 EOS_CLIENT_RELEASE=1
+# EOS Console [root://localhost] |/&gt; node ls
+node ls
+┌──────────┬─────────────────────────────────────┬────────────────┬──────────┬────────────┬──────┬──────────┬────────┬────────┬────────────────┬─────┐
+│type      │                             hostport│          geotag│    status│      status│  txgw│ gw-queued│  gw-ntx│ gw-rate│  heartbeatdelta│ nofs│
+└──────────┴─────────────────────────────────────┴────────────────┴──────────┴────────────┴──────┴──────────┴────────┴────────┴────────────────┴─────┘
+ nodesview  eos-fst1.eoscluster.cern.ch:1095      docker-test     online           on    off          0       10      120                2     1
+ nodesview  eos-fst2.eoscluster.cern.ch:1095      docker-test     online           on    off          0       10      120                2     1
+ nodesview  eos-fst3.eoscluster.cern.ch:1095      docker-test     online           on    off          0       10      120                2     1
+ nodesview  eos-fst4.eoscluster.cern.ch:1095      docker-test     online           on    off          0       10      120                2     1
+ nodesview  eos-fst5.eoscluster.cern.ch:1095      docker-test     online           on    off          0       10      120                2     1
+ nodesview  eos-fst6.eoscluster.cern.ch:1095      docker-test     online           on    off          0       10      120                2
+</code></pre></div><p>可以使用 FUSE 和 KRB5 身份验证将 EOS 挂载到客户端容器。</p> <div class="language- extra-class"><pre class="language-text"><code># docker exec -i eos-cli1 env EOS_MGM_URL=root://eos-mgm1.eoscluster.cern.ch eos # fuse mount /eos
+# docker exec -it eos-cli1 bash
+
+.... trying to create ... /eos
+===&gt; Mountpoint   : /eos
+===&gt; Fuse-Options : max_readahead=131072,max_write=4194304,fsname=eos-mgm1.eoscluster.cern.ch,url=root://eos-mgm1.eoscluster.cern.ch//eos/
+===&gt; fuse readahead        : 1
+===&gt; fuse readahead-window : 1048576
+===&gt; fuse debug            : 0
+===&gt; fuse low-level debug  : 0
+===&gt; fuse log-level        : 5
+===&gt; fuse write-cache      : 1
+===&gt; fuse write-cache-size : 67108864
+===&gt; fuse rm level protect : 1
+===&gt; fuse lazy-open-ro     : 0
+===&gt; fuse lazy-open-rw     : 1
+==== fuse multi-threading  : true
+info: successfully mounted EOS [root://eos-mgm1.eoscluster.cern.ch] under /eos
+# [root@testmachine eos-docker]# docker exec -it eos-cli1 bash
+# ls -la /eos/
+total 4
+drwxrwxr-x.  1 root root    0 Jan  1  1970 .
+drwxr-xr-x. 18 root root 4096 Mar 14 10:16 ..
+drwxrwxr-x.  1 root root    0 Jan  1  1970 dockertest
+</code></pre></div><h3 id="数据删除"><a href="#数据删除" class="header-anchor">#</a> 数据删除</h3> <p>可以使用 shutdown_services 脚本从系统中删除这些 EOS 容器。</p> <div class="language- extra-class"><pre class="language-text"><code># scripts/shutdown_services.sh
+</code></pre></div><h3 id="镜像仓库"><a href="#镜像仓库" class="header-anchor">#</a> 镜像仓库</h3> <p>可以获得每个自动构建和每个版本的图像，发布映像标有发布版本，常规图像使用其原始管道的构建 ID 进行标记。Docker 镜像可以从项目的注册表中访问。</p> <div class="language- extra-class"><pre class="language-text"><code># docker pull gitlab-registry.cern.ch/dss/eos:&lt;tag&gt;
+# docker pull gitlab-registry.cern.ch/dss/eos:206970
+</code></pre></div></div> <footer class="page-edit"><!----> <!----></footer> <!----> </main></div><div class="global-ui"></div></div>
+    <script src="/assets/js/app.96bcb8ae.js" defer></script><script src="/assets/js/2.d90d4600.js" defer></script><script src="/assets/js/10.0a4c21d4.js" defer></script>
+  </body>
+</html>

@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Lustre介绍 | 文件系统与优化</title>
+    <meta name="generator" content="VuePress 1.8.2">
+    
+    <meta name="description" content="file system">
+    
+    <link rel="preload" href="/assets/css/0.styles.e4d8b86b.css" as="style"><link rel="preload" href="/assets/js/app.96bcb8ae.js" as="script"><link rel="preload" href="/assets/js/2.d90d4600.js" as="script"><link rel="preload" href="/assets/js/16.cb296d7f.js" as="script"><link rel="prefetch" href="/assets/js/10.0a4c21d4.js"><link rel="prefetch" href="/assets/js/11.8755f828.js"><link rel="prefetch" href="/assets/js/12.d3ac89d8.js"><link rel="prefetch" href="/assets/js/13.7b12bfb9.js"><link rel="prefetch" href="/assets/js/14.91458a2c.js"><link rel="prefetch" href="/assets/js/15.a4a55f7c.js"><link rel="prefetch" href="/assets/js/17.0183764a.js"><link rel="prefetch" href="/assets/js/18.43839f37.js"><link rel="prefetch" href="/assets/js/19.958e2149.js"><link rel="prefetch" href="/assets/js/20.3983ff30.js"><link rel="prefetch" href="/assets/js/21.d0242abd.js"><link rel="prefetch" href="/assets/js/22.de1f3e26.js"><link rel="prefetch" href="/assets/js/23.d7a7eaeb.js"><link rel="prefetch" href="/assets/js/24.d950ab98.js"><link rel="prefetch" href="/assets/js/25.f56ed365.js"><link rel="prefetch" href="/assets/js/26.dae83183.js"><link rel="prefetch" href="/assets/js/27.7850c2cc.js"><link rel="prefetch" href="/assets/js/28.2e4a185e.js"><link rel="prefetch" href="/assets/js/29.f19f5ca1.js"><link rel="prefetch" href="/assets/js/3.be8f91eb.js"><link rel="prefetch" href="/assets/js/30.13e88a8c.js"><link rel="prefetch" href="/assets/js/4.259ba147.js"><link rel="prefetch" href="/assets/js/5.6558a25a.js"><link rel="prefetch" href="/assets/js/6.0492d512.js"><link rel="prefetch" href="/assets/js/7.f0d4ae72.js"><link rel="prefetch" href="/assets/js/8.40f1f355.js"><link rel="prefetch" href="/assets/js/9.2fd27de8.js">
+    <link rel="stylesheet" href="/assets/css/0.styles.e4d8b86b.css">
+  </head>
+  <body>
+    <div id="app" data-server-rendered="true"><div class="theme-container"><header class="navbar"><div class="sidebar-button"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" viewBox="0 0 448 512" class="icon"><path fill="currentColor" d="M436 124H12c-6.627 0-12-5.373-12-12V80c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12z"></path></svg></div> <a href="/" class="home-link router-link-active"><!----> <span class="site-name">文件系统与优化</span></a> <div class="links"><div class="search-box"><input aria-label="Search" autocomplete="off" spellcheck="false" value=""> <!----></div> <nav class="nav-links can-hide"><div class="nav-item"><a href="/" class="nav-link">
+  主页
+</a></div><div class="nav-item"><a href="/operation/" class="nav-link">
+  linux优化
+</a></div><div class="nav-item"><a href="/lustre/" aria-current="page" class="nav-link router-link-exact-active router-link-active">
+  Lustre
+</a></div><div class="nav-item"><a href="/openzfs/" class="nav-link">
+  openZFS
+</a></div><div class="nav-item"><a href="/eos/" class="nav-link">
+  EOS
+</a></div> <!----></nav></div></header> <div class="sidebar-mask"></div> <aside class="sidebar"><nav class="nav-links"><div class="nav-item"><a href="/" class="nav-link">
+  主页
+</a></div><div class="nav-item"><a href="/operation/" class="nav-link">
+  linux优化
+</a></div><div class="nav-item"><a href="/lustre/" aria-current="page" class="nav-link router-link-exact-active router-link-active">
+  Lustre
+</a></div><div class="nav-item"><a href="/openzfs/" class="nav-link">
+  openZFS
+</a></div><div class="nav-item"><a href="/eos/" class="nav-link">
+  EOS
+</a></div> <!----></nav>  <ul class="sidebar-links"><li><section class="sidebar-group collapsable depth-0"><p class="sidebar-heading open"><span>Lustre文件系统</span> <span class="arrow down"></span></p> <ul class="sidebar-links sidebar-group-items"><li><a href="/lustre/" aria-current="page" class="active sidebar-link">Lustre介绍</a></li><li><a href="/lustre/1.html" class="sidebar-link">架构与性能</a></li><li><a href="/lustre/2.html" class="sidebar-link">安装与测试</a></li><li><a href="/lustre/3.html" class="sidebar-link">性能优化</a></li><li><a href="/lustre/4.html" class="sidebar-link">源码初探</a></li></ul></section></li></ul> </aside> <main class="page"> <div class="theme-default-content content__default"><h1 id="lustre介绍"><a href="#lustre介绍" class="header-anchor">#</a> Lustre介绍</h1> <p>Lustre是一种平行分布式文件系统，通常用于 大型 计算机集群 。 Lustre是源自Linux和Cluster的混成词。最早在1999年集群文件系统公司Cluster File Systems Inc.开始研发，并于2003年发布 Lustre 1.0采用GNU GPLv2开源码授权。</p> <p>Lustre是面向集群的存储架构，它是基于Linux平台的开源集群（并行）文件系统，提供与POSIX兼容的文件系统接口。Lustre两个最大特征是高扩展性和高性能，能够支持数万客户端系统、PB级存储容量、数百GB的聚合I/O吞吐量。</p> <p>本系列文章主要包括以下内容：</p> <ul><li>架构与性能</li> <li>安装与测试</li> <li>性能优化</li> <li>源代码初探</li></ul></div> <footer class="page-edit"><!----> <!----></footer> <div class="page-nav"><p class="inner"><!----> <span class="next"><a href="/lustre/1.html">
+        架构与性能
+      </a>
+      →
+    </span></p></div> </main></div><div class="global-ui"></div></div>
+    <script src="/assets/js/app.96bcb8ae.js" defer></script><script src="/assets/js/2.d90d4600.js" defer></script><script src="/assets/js/16.cb296d7f.js" defer></script>
+  </body>
+</html>

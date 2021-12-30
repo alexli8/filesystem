@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>perf命令 | 文件系统与优化</title>
+    <meta name="generator" content="VuePress 1.8.2">
+    
+    <meta name="description" content="file system">
+    
+    <link rel="preload" href="/assets/css/0.styles.e4d8b86b.css" as="style"><link rel="preload" href="/assets/js/app.96bcb8ae.js" as="script"><link rel="preload" href="/assets/js/2.d90d4600.js" as="script"><link rel="preload" href="/assets/js/24.d950ab98.js" as="script"><link rel="prefetch" href="/assets/js/10.0a4c21d4.js"><link rel="prefetch" href="/assets/js/11.8755f828.js"><link rel="prefetch" href="/assets/js/12.d3ac89d8.js"><link rel="prefetch" href="/assets/js/13.7b12bfb9.js"><link rel="prefetch" href="/assets/js/14.91458a2c.js"><link rel="prefetch" href="/assets/js/15.a4a55f7c.js"><link rel="prefetch" href="/assets/js/16.cb296d7f.js"><link rel="prefetch" href="/assets/js/17.0183764a.js"><link rel="prefetch" href="/assets/js/18.43839f37.js"><link rel="prefetch" href="/assets/js/19.958e2149.js"><link rel="prefetch" href="/assets/js/20.3983ff30.js"><link rel="prefetch" href="/assets/js/21.d0242abd.js"><link rel="prefetch" href="/assets/js/22.de1f3e26.js"><link rel="prefetch" href="/assets/js/23.d7a7eaeb.js"><link rel="prefetch" href="/assets/js/25.f56ed365.js"><link rel="prefetch" href="/assets/js/26.dae83183.js"><link rel="prefetch" href="/assets/js/27.7850c2cc.js"><link rel="prefetch" href="/assets/js/28.2e4a185e.js"><link rel="prefetch" href="/assets/js/29.f19f5ca1.js"><link rel="prefetch" href="/assets/js/3.be8f91eb.js"><link rel="prefetch" href="/assets/js/30.13e88a8c.js"><link rel="prefetch" href="/assets/js/4.259ba147.js"><link rel="prefetch" href="/assets/js/5.6558a25a.js"><link rel="prefetch" href="/assets/js/6.0492d512.js"><link rel="prefetch" href="/assets/js/7.f0d4ae72.js"><link rel="prefetch" href="/assets/js/8.40f1f355.js"><link rel="prefetch" href="/assets/js/9.2fd27de8.js">
+    <link rel="stylesheet" href="/assets/css/0.styles.e4d8b86b.css">
+  </head>
+  <body>
+    <div id="app" data-server-rendered="true"><div class="theme-container"><header class="navbar"><div class="sidebar-button"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" viewBox="0 0 448 512" class="icon"><path fill="currentColor" d="M436 124H12c-6.627 0-12-5.373-12-12V80c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12z"></path></svg></div> <a href="/" class="home-link router-link-active"><!----> <span class="site-name">文件系统与优化</span></a> <div class="links"><div class="search-box"><input aria-label="Search" autocomplete="off" spellcheck="false" value=""> <!----></div> <nav class="nav-links can-hide"><div class="nav-item"><a href="/" class="nav-link">
+  主页
+</a></div><div class="nav-item"><a href="/operation/" class="nav-link router-link-active">
+  linux优化
+</a></div><div class="nav-item"><a href="/lustre/" class="nav-link">
+  Lustre
+</a></div><div class="nav-item"><a href="/openzfs/" class="nav-link">
+  openZFS
+</a></div><div class="nav-item"><a href="/eos/" class="nav-link">
+  EOS
+</a></div> <!----></nav></div></header> <div class="sidebar-mask"></div> <aside class="sidebar"><nav class="nav-links"><div class="nav-item"><a href="/" class="nav-link">
+  主页
+</a></div><div class="nav-item"><a href="/operation/" class="nav-link router-link-active">
+  linux优化
+</a></div><div class="nav-item"><a href="/lustre/" class="nav-link">
+  Lustre
+</a></div><div class="nav-item"><a href="/openzfs/" class="nav-link">
+  openZFS
+</a></div><div class="nav-item"><a href="/eos/" class="nav-link">
+  EOS
+</a></div> <!----></nav>  <ul class="sidebar-links"><li><section class="sidebar-group collapsable depth-0"><p class="sidebar-heading open"><span>优化分析</span> <span class="arrow down"></span></p> <ul class="sidebar-links sidebar-group-items"><li><a href="/operation/" aria-current="page" class="sidebar-link">linux优化分析</a></li><li><a href="/operation/top.html" class="sidebar-link">top命令</a></li><li><a href="/operation/ps.html" class="sidebar-link">ps命令</a></li><li><a href="/operation/pidstat.html" class="sidebar-link">pidstat命令</a></li><li><a href="/operation/vmstat.html" class="sidebar-link">vmstat命令</a></li><li><a href="/operation/iostat.html" class="sidebar-link">iostat命令</a></li><li><a href="/operation/lsof.html" class="sidebar-link">lsof 命令</a></li><li><a href="/operation/perf.html" aria-current="page" class="active sidebar-link">perf命令</a><ul class="sidebar-sub-headers"></ul></li><li><a href="/operation/problem-cpu.html" class="sidebar-link">CPU问题分析</a></li><li><a href="/operation/problem-io.html" class="sidebar-link">IO问题分析</a></li></ul></section></li></ul> </aside> <main class="page"> <div class="theme-default-content content__default"><h1 id="perf命令"><a href="#perf命令" class="header-anchor">#</a> perf命令</h1> <h3 id="_1-介绍"><a href="#_1-介绍" class="header-anchor">#</a> 1.介绍</h3> <p>perf是Linux下的一款性能分析工具，能够进行函数级与指令级的热点查找。</p> <p>perf的原理是这样的：每隔一个固定的时间，就在CPU上（每个核上都有）产生一个中断，在中断上看看，当前是哪个pid，哪个函数，然后给对应的pid和函数加一个统计值，这样，我们就知道CPU有百分几的时间在某个pid，或者某个函数上了。</p> <h3 id="_2-命令参数"><a href="#_2-命令参数" class="header-anchor">#</a> 2.命令参数</h3> <h4 id="_1-perf-top"><a href="#_1-perf-top" class="header-anchor">#</a> (1)perf top</h4> <p>实时显示系统/进程的性能统计信息</p> <table><thead><tr><th>信息</th> <th>含义</th></tr></thead> <tbody><tr><td>-e</td> <td>指定性能事件</td></tr> <tr><td>-a</td> <td>显示在所有CPU上的性能统计信息</td></tr> <tr><td>-C</td> <td>显示在指定CPU上的性能统计信息</td></tr> <tr><td>-p</td> <td>指定进程PID</td></tr> <tr><td>-t</td> <td>指定线程TID</td></tr> <tr><td>-K</td> <td>隐藏内核统计信息</td></tr> <tr><td>-U</td> <td>隐藏用户空间的统计信息</td></tr> <tr><td>-s</td> <td>指定待解析的符号信息</td></tr> <tr><td>‘‐G’ or‘‐‐call‐graph’</td> <td></td></tr></tbody></table> <ul><li>graph: 使用调用树，将每条调用路径进一步折叠。这种显示方式更加直观。
+每条调用路径的采样率为绝对值。也就是该条路径占整个采样域的比率。</li> <li>fractal: 默认选项。类似与 graph，但是每条路径前的采样率为相对值。</li> <li>flat: 不折叠各条调用</li> <li>选项 call_order 用以设定调用图谱的显示顺序，该选项有 2个取值，分别是callee 与caller。将该选项设为callee 时，perf按照被调用的顺序显示调用图谱，上层函数被下层函数所调用。该选项被设为caller 时，按照调用顺序显示调用图谱，即上层函数调用了下层函数路径，也不显示每条调用路径的采样率</li></ul> <p>注： Perf top需要root权限</p> <h4 id="_2-perf-stat"><a href="#_2-perf-stat" class="header-anchor">#</a> (2)Perf stat</h4> <p>分析系统/进程的整体性能概况</p> <table><thead><tr><th>参数</th> <th>含义</th></tr></thead> <tbody><tr><td>-e</td> <td>选择性能事件</td></tr> <tr><td>-i</td> <td>禁止子任务继承父任务的性能计数器。</td></tr> <tr><td>-r</td> <td>重复执行 n 次目标程序，并给出性能指标在n 次执行中的变化范围。</td></tr> <tr><td>-n</td> <td>仅输出目标程序的执行时间，而不开启任何性能计数器。</td></tr> <tr><td>-a</td> <td>指定全部cpu</td></tr> <tr><td>-C</td> <td>指定某个cpu</td></tr> <tr><td>-A</td> <td>将给出每个处理器上相应的信息。</td></tr> <tr><td>-p</td> <td>指定待分析的进程id</td></tr> <tr><td>-t</td> <td>指定待分析的线程id</td></tr></tbody></table> <h4 id="输出含义"><a href="#输出含义" class="header-anchor">#</a> 输出含义</h4> <table><thead><tr><th>参数</th> <th>含义</th></tr></thead> <tbody><tr><td>task‐clock</td> <td>事件表示目标任务真正占用处理器的时间，单位是毫秒。也称任务执行时间</td></tr> <tr><td>context-switches</td> <td>系统发生上下文切换的次数</td></tr> <tr><td>CPU-migrations</td> <td>任务从一个处理器迁往另外一个处理器的次数</td></tr> <tr><td>page-faults</td> <td>内核发生缺页的次数</td></tr> <tr><td>cycles</td> <td>程序消耗的处理器周期数</td></tr> <tr><td>instructions</td> <td>指命令执行期间产生的处理器指令数</td></tr> <tr><td>branches</td> <td>指程序在执行期间遇到的分支指令数。</td></tr> <tr><td>branch‐misses</td> <td>预测错误的分支指令数。</td></tr> <tr><td>XXX seconds time elapsed</td> <td>系程序持续时间任务执行时间/任务持续时间大于1，那可以肯定是多核引起的</td></tr></tbody></table> <h4 id="_3-perf-record"><a href="#_3-perf-record" class="header-anchor">#</a> (3)perf record</h4> <p>记录一段时间内系统/进程的性能时间</p> <table><thead><tr><th>信息</th> <th>含义</th></tr></thead> <tbody><tr><td>-e</td> <td>选择性能事件</td></tr> <tr><td>-p</td> <td>待分析进程的id</td></tr> <tr><td>-t</td> <td>待分析线程的id</td></tr> <tr><td>-a</td> <td>分析整个系统的性能</td></tr> <tr><td>-C</td> <td>只采集指定CPU数据</td></tr> <tr><td>-c</td> <td>事件的采样周期</td></tr> <tr><td>-o</td> <td>指定输出文件，默认为perf.data</td></tr> <tr><td>-A</td> <td>以append的方式写输出文件</td></tr> <tr><td>-f</td> <td>以OverWrite的方式写输出文件</td></tr> <tr><td>-g</td> <td>记录函数间的调用关系</td></tr></tbody></table> <h4 id="_4-perf-report"><a href="#_4-perf-report" class="header-anchor">#</a> (4)perf report</h4> <p>读取perf record生成的数据文件，并显示分析数据</p></div> <footer class="page-edit"><!----> <!----></footer> <div class="page-nav"><p class="inner"><span class="prev">
+      ←
+      <a href="/operation/lsof.html" class="prev">
+        lsof 命令
+      </a></span> <span class="next"><a href="/operation/problem-cpu.html">
+        CPU问题分析
+      </a>
+      →
+    </span></p></div> </main></div><div class="global-ui"></div></div>
+    <script src="/assets/js/app.96bcb8ae.js" defer></script><script src="/assets/js/2.d90d4600.js" defer></script><script src="/assets/js/24.d950ab98.js" defer></script>
+  </body>
+</html>

@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>安装与测试 | 文件系统与优化</title>
+    <meta name="generator" content="VuePress 1.8.2">
+    
+    <meta name="description" content="file system">
+    
+    <link rel="preload" href="/assets/css/0.styles.e4d8b86b.css" as="style"><link rel="preload" href="/assets/js/app.96bcb8ae.js" as="script"><link rel="preload" href="/assets/js/2.d90d4600.js" as="script"><link rel="preload" href="/assets/js/12.d3ac89d8.js" as="script"><link rel="prefetch" href="/assets/js/10.0a4c21d4.js"><link rel="prefetch" href="/assets/js/11.8755f828.js"><link rel="prefetch" href="/assets/js/13.7b12bfb9.js"><link rel="prefetch" href="/assets/js/14.91458a2c.js"><link rel="prefetch" href="/assets/js/15.a4a55f7c.js"><link rel="prefetch" href="/assets/js/16.cb296d7f.js"><link rel="prefetch" href="/assets/js/17.0183764a.js"><link rel="prefetch" href="/assets/js/18.43839f37.js"><link rel="prefetch" href="/assets/js/19.958e2149.js"><link rel="prefetch" href="/assets/js/20.3983ff30.js"><link rel="prefetch" href="/assets/js/21.d0242abd.js"><link rel="prefetch" href="/assets/js/22.de1f3e26.js"><link rel="prefetch" href="/assets/js/23.d7a7eaeb.js"><link rel="prefetch" href="/assets/js/24.d950ab98.js"><link rel="prefetch" href="/assets/js/25.f56ed365.js"><link rel="prefetch" href="/assets/js/26.dae83183.js"><link rel="prefetch" href="/assets/js/27.7850c2cc.js"><link rel="prefetch" href="/assets/js/28.2e4a185e.js"><link rel="prefetch" href="/assets/js/29.f19f5ca1.js"><link rel="prefetch" href="/assets/js/3.be8f91eb.js"><link rel="prefetch" href="/assets/js/30.13e88a8c.js"><link rel="prefetch" href="/assets/js/4.259ba147.js"><link rel="prefetch" href="/assets/js/5.6558a25a.js"><link rel="prefetch" href="/assets/js/6.0492d512.js"><link rel="prefetch" href="/assets/js/7.f0d4ae72.js"><link rel="prefetch" href="/assets/js/8.40f1f355.js"><link rel="prefetch" href="/assets/js/9.2fd27de8.js">
+    <link rel="stylesheet" href="/assets/css/0.styles.e4d8b86b.css">
+  </head>
+  <body>
+    <div id="app" data-server-rendered="true"><div class="theme-container"><header class="navbar"><div class="sidebar-button"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" viewBox="0 0 448 512" class="icon"><path fill="currentColor" d="M436 124H12c-6.627 0-12-5.373-12-12V80c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12z"></path></svg></div> <a href="/" class="home-link router-link-active"><!----> <span class="site-name">文件系统与优化</span></a> <div class="links"><div class="search-box"><input aria-label="Search" autocomplete="off" spellcheck="false" value=""> <!----></div> <nav class="nav-links can-hide"><div class="nav-item"><a href="/" class="nav-link">
+  主页
+</a></div><div class="nav-item"><a href="/operation/" class="nav-link">
+  linux优化
+</a></div><div class="nav-item"><a href="/lustre/" class="nav-link router-link-active">
+  Lustre
+</a></div><div class="nav-item"><a href="/openzfs/" class="nav-link">
+  openZFS
+</a></div><div class="nav-item"><a href="/eos/" class="nav-link">
+  EOS
+</a></div> <!----></nav></div></header> <div class="sidebar-mask"></div> <aside class="sidebar"><nav class="nav-links"><div class="nav-item"><a href="/" class="nav-link">
+  主页
+</a></div><div class="nav-item"><a href="/operation/" class="nav-link">
+  linux优化
+</a></div><div class="nav-item"><a href="/lustre/" class="nav-link router-link-active">
+  Lustre
+</a></div><div class="nav-item"><a href="/openzfs/" class="nav-link">
+  openZFS
+</a></div><div class="nav-item"><a href="/eos/" class="nav-link">
+  EOS
+</a></div> <!----></nav>  <ul class="sidebar-links"><li><section class="sidebar-group collapsable depth-0"><p class="sidebar-heading open"><span>Lustre文件系统</span> <span class="arrow down"></span></p> <ul class="sidebar-links sidebar-group-items"><li><a href="/lustre/" aria-current="page" class="sidebar-link">Lustre介绍</a></li><li><a href="/lustre/1.html" class="sidebar-link">架构与性能</a></li><li><a href="/lustre/2.html" aria-current="page" class="active sidebar-link">安装与测试</a><ul class="sidebar-sub-headers"></ul></li><li><a href="/lustre/3.html" class="sidebar-link">性能优化</a></li><li><a href="/lustre/4.html" class="sidebar-link">源码初探</a></li></ul></section></li></ul> </aside> <main class="page"> <div class="theme-default-content content__default"><h1 id="安装与测试"><a href="#安装与测试" class="header-anchor">#</a> 安装与测试</h1> <h3 id="_1-做好节点准备工作"><a href="#_1-做好节点准备工作" class="header-anchor">#</a> 1.做好节点准备工作</h3> <p>要安装的Lustre按以下架构划分节点，并且要把下面内容添加到节点的 /etc/hosts文件中，均小写。</p> <div class="language- extra-class"><pre class="language-text"><code>127.0.0.1   localhost localhost.localdomain
+
+192.168.10.13 client
+192.168.10.14 MGS MDS
+192.168.10.15 OSS1
+192.168.10.16 OSS2
+</code></pre></div><h4 id="注意-要更新所有节点的-etc-hosts"><a href="#注意-要更新所有节点的-etc-hosts" class="header-anchor">#</a> 注意：要更新所有节点的 /etc/hosts</h4> <p>接下来安装EPEL 和ZFS 仓库，以及Chrony</p> <div class="language- extra-class"><pre class="language-text"><code>yum -y install epel-release
+rpm -ivh http://download.zfsonlinux.org/epel/zfs-release.el7.centos.noarch.rpm
+yum -y install chrony
+systemctl start chronyd
+systemctl enable chronyd
+</code></pre></div><h4 id="注意所有节点时间要正确-如果有必要可以设置时区。"><a href="#注意所有节点时间要正确-如果有必要可以设置时区。" class="header-anchor">#</a> 注意所有节点时间要正确，如果有必要可以设置时区。</h4> <div class="language- extra-class"><pre class="language-text"><code>timedatectl set-timezone Asia/Tokyo
+</code></pre></div><p>建立Lustre配置文件 /etc/yum.repos.d/lustre.repo，加入以下内容：</p> <div class="language- extra-class"><pre class="language-text"><code>[lustre-server]
+name=CentOS-$releasever - Lustre
+baseurl=https://downloads.hpdd.intel.com/public/lustre/latest-feature-release/el7/server/
+gpgcheck=0
+
+[e2fsprogs]
+name=CentOS-$releasever - Ldiskfs
+baseurl=https://downloads.hpdd.intel.com/public/e2fsprogs/latest/el7/
+gpgcheck=0
+
+[lustre-client]
+name=CentOS-$releasever - Lustre
+baseurl=https://downloads.hpdd.intel.com/public/lustre/latest-feature-release/el7/client/
+gpgcheck=0
+
+</code></pre></div><p>在所有节点安装最新版本的Lustre内核以及客户端，</p> <div class="language- extra-class"><pre class="language-text"><code>yum -y install e2fsprogs \
+    lustre-client \
+    kernel-3.10.0-514.21.1.el7_lustre.x86_64 \
+    kernel-devel-3.10.0-514.21.1.el7_lustre.x86_64 \
+    kernel-headers-3.10.0-514.21.1.el7_lustre.x86_64
+</code></pre></div><p>最后需要重启所有节点来支持使用Lustre内核。</p> <h3 id="_2-安装lnet"><a href="#_2-安装lnet" class="header-anchor">#</a> 2.安装Lnet</h3> <p>建立Lnet的modprobe配置文件/etc/modprobe.d/let.conf 以及网络参数</p> <div class="language- extra-class"><pre class="language-text"><code>options lnet networks=tcp0(eth0)
+</code></pre></div><p>手动加载modprobe模块</p> <div class="language- extra-class"><pre class="language-text"><code>modprobe lnet
+</code></pre></div><p>确认modprobe模块已经加载</p> <div class="language- extra-class"><pre class="language-text"><code>lsmod | grep lnet
+</code></pre></div><p>为了启动时自动加载lnet modprobe模块，建立/etc/sysconfig/modules/lnet.modules 并且加入以下内容：</p> <div class="language- extra-class"><pre class="language-text"><code>#!/bin/sh
+
+if [ ! -c /dev/lnet ] ; then
+    exec /sbin/modprobe lnet &gt;/dev/null 2&gt;&amp;1
+fi
+</code></pre></div><h3 id="_2-客户端加载lustre"><a href="#_2-客户端加载lustre" class="header-anchor">#</a> 2.客户端加载Lustre</h3> <p>加载lustre内核模块</p> <div class="language- extra-class"><pre class="language-text"><code>modprobe lustre
+</code></pre></div><p>检查内核模块是否加载</p> <div class="language- extra-class"><pre class="language-text"><code>lsmod |grep lustre
+</code></pre></div><p>为了启动时自动加载lustre modprobe模块，建立/etc/sysconfig/modules/lustre.modules 并且加入以下内容：</p> <div class="language- extra-class"><pre class="language-text"><code>#!/bin/sh
+
+/sbin/lsmod | /bin/grep lustre 1&gt;/dev/null 2&gt;&amp;1
+if [ ! $? ] ; then
+   /sbin/modprobe lustre &gt;/dev/null 2&gt;&amp;1
+fi
+</code></pre></div><h3 id="_3-创建lustre文件系统"><a href="#_3-创建lustre文件系统" class="header-anchor">#</a> 3.创建Lustre文件系统</h3> <h4 id="创建mgt-on-mgs"><a href="#创建mgt-on-mgs" class="header-anchor">#</a> 创建MGT on MGS</h4> <div class="language- extra-class"><pre class="language-text"><code>ssh root@mgs
+mkfs.lustre --mgs /dev/xvdb
+mkdir /mgt
+mount.lustre /dev/xvdb /mgt
+</code></pre></div><h4 id="创建-mdt-on-mds"><a href="#创建-mdt-on-mds" class="header-anchor">#</a> 创建 MDT on MDS</h4> <div class="language- extra-class"><pre class="language-text"><code>ssh root@mds
+mkfs.lustre --fsname=lustrefs --mgsnode=mgs@tcp0 \
+    --mdt --index=0 /dev/xvdb
+mkdir /mdt
+mount.lustre /dev/xvdb /mdt
+</code></pre></div><h4 id="创建ost-1和ost-2"><a href="#创建ost-1和ost-2" class="header-anchor">#</a> 创建OST 1和OST 2</h4> <div class="language- extra-class"><pre class="language-text"><code>ssh root@oss1
+mkfs.lustre --ost --fsname=lustrefs --mgsnode=mgs@tcp0 \
+    --index=1 /dev/xvdb
+mkfs.lustre --ost --fsname=lustrefs --mgsnode=mgs@tcp0 \
+    --index=2 /dev/xvdc
+mkdir /ost1
+mkdir /ost2
+mount.lustre /dev/xvdb /ost1
+mount.lustre /dev/xvdc /ost2
+</code></pre></div><h4 id="挂在lustre客户端"><a href="#挂在lustre客户端" class="header-anchor">#</a> 挂在lustre客户端</h4> <div class="language- extra-class"><pre class="language-text"><code>mkdir /lustrefs
+mount -t lustre mgs@tcp0:/lustrefs /lustrefs
+</code></pre></div><h3 id="_4-测试"><a href="#_4-测试" class="header-anchor">#</a> 4.测试</h3> <p>从客户端上可以查看Lustre安装状态并做测试</p> <p>查看 /lustrefs</p> <div class="language- extra-class"><pre class="language-text"><code>df -h /lustrefs
+Filesystem                   Size  Used Avail Use% Mounted on
+172.31.42.130@tcp:/lustrefs   56G  223M   53G   1% /lustrefs
+</code></pre></div><p>查看服务端</p> <div class="language- extra-class"><pre class="language-text"><code>lfs check servers
+lustrefs-MDT0000-mdc-ffff88003bfbd000 active.
+lustrefs-OST0001-osc-ffff88003bfbd000 active.
+lustrefs-OST0002-osc-ffff88003bfbd000 active.
+lustrefs-OST0003-osc-ffff88003bfbd000 active.
+lustrefs-OST0004-osc-ffff88003bfbd000 active.
+lustrefs-OST0005-osc-ffff88003bfbd000 active.
+lustrefs-OST0006-osc-ffff88003bfbd000 active.
+</code></pre></div><p>查看文件系统</p> <div class="language- extra-class"><pre class="language-text"><code>lfs df -h
+UUID                       bytes        Used   Available Use% Mounted on
+lustrefs-MDT0000_UUID        5.6G       45.8M        5.0G   1% /lustrefs[MDT:0]
+lustrefs-OST0001_UUID        9.2G       37.1M        8.7G   0% /lustrefs[OST:1]
+lustrefs-OST0002_UUID        9.2G       37.1M        8.7G   0% /lustrefs[OST:2]
+lustrefs-OST0003_UUID        9.2G       37.1M        8.7G   0% /lustrefs[OST:3]
+lustrefs-OST0004_UUID        9.2G       37.1M        8.7G   0% /lustrefs[OST:4]
+lustrefs-OST0005_UUID        9.2G       37.1M        8.7G   0% /lustrefs[OST:5]
+lustrefs-OST0006_UUID        9.2G       37.1M        8.7G   0% /lustrefs[OST:6]
+
+filesystem_summary:        55.3G      222.9M       52.0G   0% /lustrefs
+</code></pre></div><p>如果以上没有问题，可以做一个快速测试</p> <div class="language- extra-class"><pre class="language-text"><code>[root@client ~]# for aa in {1..5}; do dd if=/dev/zero of=/lustrefs/file$aa bs=4k iflag=fullblock,count_bytes count=1G; done
+[root@client ~]# df -h /lustrefs
+Filesystem                   Size  Used Avail Use% Mounted on
+172.31.42.130@tcp:/lustrefs   56G  5.3G   47G  10% /lustrefs
+[root@client ~]# lfs df -h
+UUID                       bytes        Used   Available Use% Mounted on
+lustrefs-MDT0000_UUID        5.6G       45.8M        5.0G   1% /lustrefs[MDT:0]
+lustrefs-OST0001_UUID        9.2G        1.0G        7.7G  12% /lustrefs[OST:1]
+lustrefs-OST0002_UUID        9.2G       37.1M        8.7G   0% /lustrefs[OST:2]
+lustrefs-OST0003_UUID        9.2G        2.0G        6.6G  23% /lustrefs[OST:3]
+lustrefs-OST0004_UUID        9.2G        1.0G        7.7G  12% /lustrefs[OST:4]
+lustrefs-OST0005_UUID        9.2G       37.1M        8.7G   0% /lustrefs[OST:5]
+lustrefs-OST0006_UUID        9.2G        1.0G        7.6G  12% /lustrefs[OST:6]
+</code></pre></div><h4 id="注意-以上安装方式没有组raid-需要的话要选择zfs或者硬件提供。"><a href="#注意-以上安装方式没有组raid-需要的话要选择zfs或者硬件提供。" class="header-anchor">#</a> 注意：以上安装方式没有组RAID，需要的话要选择ZFS或者硬件提供。</h4></div> <footer class="page-edit"><!----> <!----></footer> <div class="page-nav"><p class="inner"><span class="prev">
+      ←
+      <a href="/lustre/1.html" class="prev">
+        架构与性能
+      </a></span> <span class="next"><a href="/lustre/3.html">
+        性能优化
+      </a>
+      →
+    </span></p></div> </main></div><div class="global-ui"></div></div>
+    <script src="/assets/js/app.96bcb8ae.js" defer></script><script src="/assets/js/2.d90d4600.js" defer></script><script src="/assets/js/12.d3ac89d8.js" defer></script>
+  </body>
+</html>

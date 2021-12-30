@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>openZFS 文件系统 | 文件系统与优化</title>
+    <meta name="generator" content="VuePress 1.8.2">
+    
+    <meta name="description" content="file system">
+    
+    <link rel="preload" href="/assets/css/0.styles.e4d8b86b.css" as="style"><link rel="preload" href="/assets/js/app.96bcb8ae.js" as="script"><link rel="preload" href="/assets/js/2.d90d4600.js" as="script"><link rel="preload" href="/assets/js/17.0183764a.js" as="script"><link rel="prefetch" href="/assets/js/10.0a4c21d4.js"><link rel="prefetch" href="/assets/js/11.8755f828.js"><link rel="prefetch" href="/assets/js/12.d3ac89d8.js"><link rel="prefetch" href="/assets/js/13.7b12bfb9.js"><link rel="prefetch" href="/assets/js/14.91458a2c.js"><link rel="prefetch" href="/assets/js/15.a4a55f7c.js"><link rel="prefetch" href="/assets/js/16.cb296d7f.js"><link rel="prefetch" href="/assets/js/18.43839f37.js"><link rel="prefetch" href="/assets/js/19.958e2149.js"><link rel="prefetch" href="/assets/js/20.3983ff30.js"><link rel="prefetch" href="/assets/js/21.d0242abd.js"><link rel="prefetch" href="/assets/js/22.de1f3e26.js"><link rel="prefetch" href="/assets/js/23.d7a7eaeb.js"><link rel="prefetch" href="/assets/js/24.d950ab98.js"><link rel="prefetch" href="/assets/js/25.f56ed365.js"><link rel="prefetch" href="/assets/js/26.dae83183.js"><link rel="prefetch" href="/assets/js/27.7850c2cc.js"><link rel="prefetch" href="/assets/js/28.2e4a185e.js"><link rel="prefetch" href="/assets/js/29.f19f5ca1.js"><link rel="prefetch" href="/assets/js/3.be8f91eb.js"><link rel="prefetch" href="/assets/js/30.13e88a8c.js"><link rel="prefetch" href="/assets/js/4.259ba147.js"><link rel="prefetch" href="/assets/js/5.6558a25a.js"><link rel="prefetch" href="/assets/js/6.0492d512.js"><link rel="prefetch" href="/assets/js/7.f0d4ae72.js"><link rel="prefetch" href="/assets/js/8.40f1f355.js"><link rel="prefetch" href="/assets/js/9.2fd27de8.js">
+    <link rel="stylesheet" href="/assets/css/0.styles.e4d8b86b.css">
+  </head>
+  <body>
+    <div id="app" data-server-rendered="true"><div class="theme-container no-sidebar"><header class="navbar"><div class="sidebar-button"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" viewBox="0 0 448 512" class="icon"><path fill="currentColor" d="M436 124H12c-6.627 0-12-5.373-12-12V80c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12z"></path></svg></div> <a href="/" class="home-link router-link-active"><!----> <span class="site-name">文件系统与优化</span></a> <div class="links"><div class="search-box"><input aria-label="Search" autocomplete="off" spellcheck="false" value=""> <!----></div> <nav class="nav-links can-hide"><div class="nav-item"><a href="/" class="nav-link">
+  主页
+</a></div><div class="nav-item"><a href="/operation/" class="nav-link">
+  linux优化
+</a></div><div class="nav-item"><a href="/lustre/" class="nav-link">
+  Lustre
+</a></div><div class="nav-item"><a href="/openzfs/" aria-current="page" class="nav-link router-link-exact-active router-link-active">
+  openZFS
+</a></div><div class="nav-item"><a href="/eos/" class="nav-link">
+  EOS
+</a></div> <!----></nav></div></header> <div class="sidebar-mask"></div> <aside class="sidebar"><nav class="nav-links"><div class="nav-item"><a href="/" class="nav-link">
+  主页
+</a></div><div class="nav-item"><a href="/operation/" class="nav-link">
+  linux优化
+</a></div><div class="nav-item"><a href="/lustre/" class="nav-link">
+  Lustre
+</a></div><div class="nav-item"><a href="/openzfs/" aria-current="page" class="nav-link router-link-exact-active router-link-active">
+  openZFS
+</a></div><div class="nav-item"><a href="/eos/" class="nav-link">
+  EOS
+</a></div> <!----></nav>  <!----> </aside> <main class="page"> <div class="theme-default-content content__default"><h2 id="openzfs-文件系统"><a href="#openzfs-文件系统" class="header-anchor">#</a> openZFS 文件系统</h2> <p>openZFS文件系统是由 Sun™ 开发使用存储池方法的新技术ZFS文件系统的一个开源版分支。 这就是说只有在需要存储数据的时候空间才会被使用。 它也为保护数据最大完整性而设计的，支持数据快照， 多份拷贝和数据校验。增加了被称为 RAID-Z 的新的数据复制类型。RAID-Z 是种类似于 RAID5类型, 但被设计成防止写入漏洞。</p> <h3 id="单个磁盘存储池"><a href="#单个磁盘存储池" class="header-anchor">#</a> 单个磁盘存储池</h3> <p>在单个磁盘上创建一个简单， 非冗余的 ZFS， 使用 zpool 命令：</p> <div class="language- extra-class"><pre class="language-text"><code># zpool create example /dev/da0
+</code></pre></div><p>可以通过 df 的输出查看新的存储池：</p> <div class="language- extra-class"><pre class="language-text"><code># df
+Filesystem  1K-blocks    Used    Avail Capacity  Mounted on
+/dev/ad0s1a   2026030  235230  1628718    13%    /
+devfs               1       1        0   100%    /dev
+/dev/ad0s1d  54098308 1032846 48737598     2%    /usr
+example      17547136       0 17547136     0%    /example
+</code></pre></div><p>这份输出清楚的表明了 example 存储池不仅创建成功而且被 挂载 了。 我们能像访问普通的文件系统那样访问它， 就像以下例子中演示的那样，用户能够在上面创建文件并浏览：</p> <div class="language- extra-class"><pre class="language-text"><code># cd /example
+# ls
+# touch testfile
+# ls -al
+total 4
+drwxr-xr-x   2 root  wheel    3 Aug 29 23:15 .
+drwxr-xr-x  21 root  wheel  512 Aug 29 23:12 ..
+-rw-r--r--   1 root  wheel    0 Aug 29 23:15 testfile
+</code></pre></div><p>在这个存储池上创建一个文件系统，并启用压缩：</p> <div class="language- extra-class"><pre class="language-text"><code># zfs create example/compressed
+# zfs set compression=gzip example/compressed
+</code></pre></div><p>现在 example/compressed 是一个启用了压缩的 ZFS 文件系统了。 可以尝试复制一些大的文件到 /example/compressed。</p> <p>使用这个命令可以禁用压缩：</p> <div class="language- extra-class"><pre class="language-text"><code># zfs set compression=off example/compressed
+</code></pre></div><p>使用如下的命令卸载这个文件系统，并用 df 工具确认：</p> <div class="language- extra-class"><pre class="language-text"><code># zfs umount example/compressed
+# df
+Filesystem  1K-blocks    Used    Avail Capacity  Mounted on
+/dev/ad0s1a   2026030  235232  1628716    13%    /
+devfs               1       1        0   100%    /dev
+/dev/ad0s1d  54098308 1032864 48737580     2%    /usr
+example      17547008       0 17547008     0%    /example
+</code></pre></div><p>重新挂在这个文件系统使之能被访问， 并用 df 确认：</p> <div class="language- extra-class"><pre class="language-text"><code># zfs mount example/compressed
+# df
+Filesystem         1K-blocks    Used    Avail Capacity  Mounted on
+/dev/ad0s1a          2026030  235234  1628714    13%    /
+devfs                      1       1        0   100%    /dev
+/dev/ad0s1d         54098308 1032864 48737580     2%    /usr
+example             17547008       0 17547008     0%    /example
+example/compressed  17547008       0 17547008     0%    /example/compressed
+</code></pre></div><p>存储池与文件系统也可通过 mount 的输出查看：</p> <div class="language- extra-class"><pre class="language-text"><code># mount
+/dev/ad0s1a on / (ufs, local)
+devfs on /dev (devfs, local)
+/dev/ad0s1d on /usr (ufs, local, soft-updates)
+example on /example (zfs, local)
+example/data on /example/data (zfs, local)
+example/compressed on /example/compressed (zfs, local)
+</code></pre></div><p>如前面所提到的，ZFS 文件系统，在创建之后就能像普通的文件系统那样使用。然而， 还有很多其他的特性是可用的。在下面的例子中， 我们将创建一个新的文件系统，data。 并要在上面存储些重要的文件， 所以文件系统需要被设置成把每一个数据块都保存两份拷贝：</p> <div class="language- extra-class"><pre class="language-text"><code># zfs create example/data
+# zfs set copies=2 example/data
+</code></pre></div><p>现在可以再次使用 df 查看数据和空间的使用状况：</p> <div class="language- extra-class"><pre class="language-text"><code># df
+Filesystem         1K-blocks    Used    Avail Capacity  Mounted on
+/dev/ad0s1a          2026030  235234  1628714    13%    /
+devfs                      1       1        0   100%    /dev
+/dev/ad0s1d         54098308 1032864 48737580     2%    /usr
+example             17547008       0 17547008     0%    /example
+example/compressed  17547008       0 17547008     0%    /example/compressed
+example/data        17547008       0 17547008     0%    /example/data
+</code></pre></div><p>请注意存储池上的每一个文件系统都有着相同数量的可用空间。 这就是我们在这些例子中使用 df 的原因， 是为了文件系统都是从相同的存储池取得它们所需的空间。 ZFS 去掉了诸如卷和分区此类的概念， 并允许多个文件系统占用同一个存储池。 不再需要文件系统与存储池的时候能像这样销毁它们：</p> <div class="language- extra-class"><pre class="language-text"><code># zfs destroy example/compressed
+# zfs destroy example/data
+# zpool destroy example
+</code></pre></div><p>磁盘无法避免的会坏掉和停止运转。 当这块磁盘坏掉的时候，上面的数据都将丢失。 一个避免因磁盘损坏而丢失数据的方法是使用 RAID。ZFS 在它的存储池设计中支持这样的特性， 这便是下一节将探讨的。</p> <h3 id="zfs-raid-z"><a href="#zfs-raid-z" class="header-anchor">#</a> ZFS RAID-Z</h3> <p>正如前文中所提到的，这一章节将假设存在 3 个 SCSI 设备， da0， da1 和 da2 (或者 ad0 和超出此例使用了 IDE 磁盘)。 使用如下的命令创建一个 RAID-Z 存储池:</p> <div class="language- extra-class"><pre class="language-text"><code># zpool create storage raidz da0 da1 da2
+</code></pre></div><p>注意: 推荐在一个 RAID-Z 配置中使用的磁盘数量为 3 至 9 块。 如果你要求在单独的一个存储池中使用 10 块或更多的磁盘， 请考虑分拆成更小 RAID-z 组。 如果你只有 2 块磁盘， 并仍然需要冗余， 请考虑使用 ZFS 的 mirror 特性。zpool storage 至此就创建好了。 如需配给更多的磁盘设备则把它们加这个列表的后面。 在存储池上创建一个叫 home 的文件系统， 用户的文件最终都将被保存在上面：</p> <div class="language- extra-class"><pre class="language-text"><code># zfs create storage/home
+</code></pre></div><p>像前文中提到的那样，用户的目录与文件也可启用压缩并保存多份拷贝， 可通过如下的命令完成：</p> <div class="language- extra-class"><pre class="language-text"><code># zfs set copies=2 storage/home
+# zfs set compression=gzip storage/home
+</code></pre></div><p>把用户的数据都拷贝过来并创建一个符号链接， 让他们开始使用这个新的目录：</p> <div class="language- extra-class"><pre class="language-text"><code># cp -rp /home/* /storage/home
+# rm -rf /home /usr/home
+# ln -s /storage/home /home
+# ln -s /storage/home /usr/home
+</code></pre></div><p>现在用户的数据应该都保存在新创建的 /storage/home 上了。 测试添加一个新用户并以这个身份登录。</p> <p>尝试创建一个可日后用来回退的快照：</p> <div class="language- extra-class"><pre class="language-text"><code># zfs snapshot storage/home@08-30-08
+</code></pre></div><p>请注意快照选项将只会抓取一个真实的文件系统， 而不是某个用户目录或文件。@ 字符为文件系统名或卷名的分隔符。 当用户目录被损坏时，可用如下命令恢复：</p> <div class="language- extra-class"><pre class="language-text"><code># zfs rollback storage/home@08-30-08
+</code></pre></div><p>获得所有可用快照的列表，可使用 ls 命令查看文件系统的 .zfs/snapshot 目录。例如，执行如下命令来查看之前抓取的快照：</p> <div class="language- extra-class"><pre class="language-text"><code># ls /storage/home/.zfs/snapshot
+</code></pre></div><p>可以编写一个脚本来每月定期抓取用户数据的快照，久而久之， 快照可能消耗掉大量的磁盘空间。 之前创建的快照可用以下命令删除：</p> <div class="language- extra-class"><pre class="language-text"><code># zfs destroy storage/home@08-30-08
+</code></pre></div><p>在所有这些测试之后，我们没有理由再把 /store/home 这样放置了。让它称为真正的 /home 文件系统：</p> <div class="language- extra-class"><pre class="language-text"><code># zfs set mountpoint=/home storage/home
+</code></pre></div><p>使用 df 和 mount 命令将显示现在系统把我们的文件系统真正当作了 /home：</p> <div class="language- extra-class"><pre class="language-text"><code># mount
+/dev/ad0s1a on / (ufs, local)
+devfs on /dev (devfs, local)
+/dev/ad0s1d on /usr (ufs, local, soft-updates)
+storage on /storage (zfs, local)
+storage/home on /home (zfs, local)
+# df
+Filesystem   1K-blocks    Used    Avail Capacity  Mounted on
+/dev/ad0s1a    2026030  235240  1628708    13%    /
+devfs                1       1        0   100%    /dev
+/dev/ad0s1d   54098308 1032826 48737618     2%    /usr
+storage       26320512       0 26320512     0%    /storage
+storage/home  26320512       0 26320512     0%    /home
+</code></pre></div><p>这样就基本完成了 RAID-Z 的配置了。使用夜间 periodic(8) 获取有关文件系统创建之类的状态更新， 执行如下的命令：</p> <div class="language- extra-class"><pre class="language-text"><code># echo 'daily_status_zfs_enable=&quot;YES&quot;' &gt;&gt; /etc/periodic.conf
+</code></pre></div><h3 id="修复-raid-z"><a href="#修复-raid-z" class="header-anchor">#</a> 修复 RAID-Z</h3> <p>每一种软 RAID 都有监测它们 状态 的方法。 ZFS 也不例外。 可以使用如下的命令查看 RAID-Z 设备：</p> <div class="language- extra-class"><pre class="language-text"><code># zpool status -x
+</code></pre></div><p>如果所有的存储池处于健康状态并且一切正常的话， 将返回如下信息：</p> <div class="language- extra-class"><pre class="language-text"><code>all pools are healthy
+</code></pre></div><p>如果存在问题，可能是一个磁盘设备下线了， 那么返回的存储池的状态将看上去是类似这个样子的：</p> <div class="language- extra-class"><pre class="language-text"><code>  pool: storage
+ state: DEGRADED
+status: One or more devices has been taken offline by the administrator.
+	Sufficient replicas exist for the pool to continue functioning in a
+	degraded state.
+action: Online the device using 'zpool online' or replace the device with
+	'zpool replace'.
+ scrub: none requested
+config:
+
+	NAME        STATE     READ WRITE CKSUM
+	storage     DEGRADED     0     0     0
+	  raidz1    DEGRADED     0     0     0
+	    da0     ONLINE       0     0     0
+	    da1     OFFLINE      0     0     0
+	    da2     ONLINE       0     0     0
+
+errors: No known data errors
+</code></pre></div><p>在这个例子中，这是由管理员把此设备下线后的状态。 可以使用如下的命令将磁盘下线：</p> <div class="language- extra-class"><pre class="language-text"><code># zpool offline storage da1
+</code></pre></div><p>现在切断系统电源之后就可以替换下 da1 了。 当系统再次上线时，使用如下的命令替换磁盘：</p> <div class="language- extra-class"><pre class="language-text"><code># zpool replace storage da1
+</code></pre></div><p>至此可用不带 -x 标志的命令再次检查状态：</p> <div class="language- extra-class"><pre class="language-text"><code># zpool status storage
+ pool: storage
+ state: ONLINE
+ scrub: resilver completed with 0 errors on Sat Aug 30 19:44:11 2008
+config:
+
+	NAME        STATE     READ WRITE CKSUM
+	storage     ONLINE       0     0     0
+	  raidz1    ONLINE       0     0     0
+	    da0     ONLINE       0     0     0
+	    da1     ONLINE       0     0     0
+	    da2     ONLINE       0     0     0
+
+errors: No known data errors
+</code></pre></div><p>在这个例子中，一切都显示正常。</p> <h3 id="数据校验"><a href="#数据校验" class="header-anchor">#</a> 数据校验</h3> <p>正如前面所提到的，ZFS 使用 校验和(checksum) 来检查存储数据的完整性。 这时在文件系统创建时自动启用的，可使用以下的命令禁用：</p> <div class="language- extra-class"><pre class="language-text"><code># zfs set checksum=off storage/home
+</code></pre></div><p>这不是个明智的选择，因为校验和 不仅非常有用而且只需占用少量的存储空间。 并且启用它们也不会明显的消耗过多资源。 启用后就可以让 ZFS 使用校验和校验来检查数据的完整。 这个过程通常称为 “scrubbing”。 可以使用以下的命令检查 storage 存储池里数据的完整性：</p> <div class="language- extra-class"><pre class="language-text"><code># zpool scrub storage
+</code></pre></div><p>这个过程需花费相当长的时间，取决于存储的数据量。 而且 I/O 非常密集， 所以在任何时间只能执行一个这样的操作。 在 scrub 完成之后，状态就会被更新， 可使用如下的命令查看：</p> <div class="language- extra-class"><pre class="language-text"><code># zpool status storage
+ pool: storage
+ state: ONLINE
+ scrub: scrub completed with 0 errors on Sat Aug 30 19:57:37 2008
+config:
+
+	NAME        STATE     READ WRITE CKSUM
+	storage     ONLINE       0     0     0
+	  raidz1    ONLINE       0     0     0
+	    da0     ONLINE       0     0     0
+	    da1     ONLINE       0     0     0
+	    da2     ONLINE       0     0     0
+
+errors: No known data errors
+</code></pre></div><p>这个例子中完成时间非常的清楚。 这个特性可以帮助我们在很长的一段时间内确保数据的完整。</p></div> <footer class="page-edit"><!----> <!----></footer> <!----> </main></div><div class="global-ui"></div></div>
+    <script src="/assets/js/app.96bcb8ae.js" defer></script><script src="/assets/js/2.d90d4600.js" defer></script><script src="/assets/js/17.0183764a.js" defer></script>
+  </body>
+</html>

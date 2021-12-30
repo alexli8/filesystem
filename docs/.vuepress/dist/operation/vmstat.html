@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>vmstat命令 | 文件系统与优化</title>
+    <meta name="generator" content="VuePress 1.8.2">
+    
+    <meta name="description" content="file system">
+    
+    <link rel="preload" href="/assets/css/0.styles.e4d8b86b.css" as="style"><link rel="preload" href="/assets/js/app.96bcb8ae.js" as="script"><link rel="preload" href="/assets/js/2.d90d4600.js" as="script"><link rel="preload" href="/assets/js/30.13e88a8c.js" as="script"><link rel="prefetch" href="/assets/js/10.0a4c21d4.js"><link rel="prefetch" href="/assets/js/11.8755f828.js"><link rel="prefetch" href="/assets/js/12.d3ac89d8.js"><link rel="prefetch" href="/assets/js/13.7b12bfb9.js"><link rel="prefetch" href="/assets/js/14.91458a2c.js"><link rel="prefetch" href="/assets/js/15.a4a55f7c.js"><link rel="prefetch" href="/assets/js/16.cb296d7f.js"><link rel="prefetch" href="/assets/js/17.0183764a.js"><link rel="prefetch" href="/assets/js/18.43839f37.js"><link rel="prefetch" href="/assets/js/19.958e2149.js"><link rel="prefetch" href="/assets/js/20.3983ff30.js"><link rel="prefetch" href="/assets/js/21.d0242abd.js"><link rel="prefetch" href="/assets/js/22.de1f3e26.js"><link rel="prefetch" href="/assets/js/23.d7a7eaeb.js"><link rel="prefetch" href="/assets/js/24.d950ab98.js"><link rel="prefetch" href="/assets/js/25.f56ed365.js"><link rel="prefetch" href="/assets/js/26.dae83183.js"><link rel="prefetch" href="/assets/js/27.7850c2cc.js"><link rel="prefetch" href="/assets/js/28.2e4a185e.js"><link rel="prefetch" href="/assets/js/29.f19f5ca1.js"><link rel="prefetch" href="/assets/js/3.be8f91eb.js"><link rel="prefetch" href="/assets/js/4.259ba147.js"><link rel="prefetch" href="/assets/js/5.6558a25a.js"><link rel="prefetch" href="/assets/js/6.0492d512.js"><link rel="prefetch" href="/assets/js/7.f0d4ae72.js"><link rel="prefetch" href="/assets/js/8.40f1f355.js"><link rel="prefetch" href="/assets/js/9.2fd27de8.js">
+    <link rel="stylesheet" href="/assets/css/0.styles.e4d8b86b.css">
+  </head>
+  <body>
+    <div id="app" data-server-rendered="true"><div class="theme-container"><header class="navbar"><div class="sidebar-button"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" viewBox="0 0 448 512" class="icon"><path fill="currentColor" d="M436 124H12c-6.627 0-12-5.373-12-12V80c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12z"></path></svg></div> <a href="/" class="home-link router-link-active"><!----> <span class="site-name">文件系统与优化</span></a> <div class="links"><div class="search-box"><input aria-label="Search" autocomplete="off" spellcheck="false" value=""> <!----></div> <nav class="nav-links can-hide"><div class="nav-item"><a href="/" class="nav-link">
+  主页
+</a></div><div class="nav-item"><a href="/operation/" class="nav-link router-link-active">
+  linux优化
+</a></div><div class="nav-item"><a href="/lustre/" class="nav-link">
+  Lustre
+</a></div><div class="nav-item"><a href="/openzfs/" class="nav-link">
+  openZFS
+</a></div><div class="nav-item"><a href="/eos/" class="nav-link">
+  EOS
+</a></div> <!----></nav></div></header> <div class="sidebar-mask"></div> <aside class="sidebar"><nav class="nav-links"><div class="nav-item"><a href="/" class="nav-link">
+  主页
+</a></div><div class="nav-item"><a href="/operation/" class="nav-link router-link-active">
+  linux优化
+</a></div><div class="nav-item"><a href="/lustre/" class="nav-link">
+  Lustre
+</a></div><div class="nav-item"><a href="/openzfs/" class="nav-link">
+  openZFS
+</a></div><div class="nav-item"><a href="/eos/" class="nav-link">
+  EOS
+</a></div> <!----></nav>  <ul class="sidebar-links"><li><section class="sidebar-group collapsable depth-0"><p class="sidebar-heading open"><span>优化分析</span> <span class="arrow down"></span></p> <ul class="sidebar-links sidebar-group-items"><li><a href="/operation/" aria-current="page" class="sidebar-link">linux优化分析</a></li><li><a href="/operation/top.html" class="sidebar-link">top命令</a></li><li><a href="/operation/ps.html" class="sidebar-link">ps命令</a></li><li><a href="/operation/pidstat.html" class="sidebar-link">pidstat命令</a></li><li><a href="/operation/vmstat.html" aria-current="page" class="active sidebar-link">vmstat命令</a><ul class="sidebar-sub-headers"></ul></li><li><a href="/operation/iostat.html" class="sidebar-link">iostat命令</a></li><li><a href="/operation/lsof.html" class="sidebar-link">lsof 命令</a></li><li><a href="/operation/perf.html" class="sidebar-link">perf命令</a></li><li><a href="/operation/problem-cpu.html" class="sidebar-link">CPU问题分析</a></li><li><a href="/operation/problem-io.html" class="sidebar-link">IO问题分析</a></li></ul></section></li></ul> </aside> <main class="page"> <div class="theme-default-content content__default"><h1 id="vmstat命令"><a href="#vmstat命令" class="header-anchor">#</a> vmstat命令</h1> <h3 id="_1-介绍"><a href="#_1-介绍" class="header-anchor">#</a> 1.介绍</h3> <p>vmstat命令用来获得有关进程、虚存、页面交换空间及 CPU活动的信息。这些信息反映了系统的负载情况。</p> <h4 id="虚拟内存运行原理"><a href="#虚拟内存运行原理" class="header-anchor">#</a> 虚拟内存运行原理</h4> <p>在系统中运行的每个进程都需要使用到内存，但不是每个进程都需要每时每刻使用系统分配的内存空间。当系统运行所需内存超过实际的物理内存，内核会释放某些进程所占用但未使用的部分或所有物理内存，将这部分资料存储在磁盘上直到进程下一次调用，并将释放出的内存提供给有需要的进程使用。</p> <p>在Linux内存管理中，主要是通过“调页Paging”和“交换Swapping”来完成上述的内存调度。调页算法是将内存中最近不常使用的页面换到磁盘上，把活动页面保留在内存中供进程使用。交换技术是将整个进程，而不是部分页面，全部交换到磁盘上。</p> <p>分页(Page)写入磁盘的过程被称作Page-Out，分页(Page)从磁盘重新回到内存的过程被称作Page-In。当内核需要一个分页时，但发现此分页不在物理内存中(因为已经被Page-Out了)，此时就发生了分页错误（Page Fault）。</p> <p>当系统内核发现可运行内存变少时，就会通过Page-Out来释放一部分物理内存。经管Page-Out不是经常发生，但是如果Page-out频繁不断的发生，直到当内核管理分页的时间超过运行程式的时间时，系统效能会急剧下降。这时的系统已经运行非常慢或进入暂停状态，这种状态亦被称作thrashing(颠簸)。</p> <h3 id="_2-参数命令"><a href="#_2-参数命令" class="header-anchor">#</a> 2.参数命令：</h3> <table><thead><tr><th>信息</th> <th>含义</th></tr></thead> <tbody><tr><td>-a</td> <td>显示活跃和非活跃内存</td></tr> <tr><td>-f</td> <td>显示从系统启动至今的fork数量 。</td></tr> <tr><td>-m</td> <td>显示slabinfo</td></tr> <tr><td>-n</td> <td>只在开始时显示一次各字段名称。</td></tr> <tr><td>-s</td> <td>显示内存相关统计信息及多种系统活动数量。</td></tr> <tr><td>delay</td> <td>刷新时间间隔。如果不指定，只显示一条结果。</td></tr> <tr><td>count</td> <td>刷新次数。如果不指定刷新次数，但指定了刷新时间间隔，这时刷新次数为无穷。</td></tr> <tr><td>-d</td> <td>显示磁盘相关统计信息。</td></tr> <tr><td>-p</td> <td>显示指定磁盘分区统计信息</td></tr> <tr><td>-S</td> <td>使用指定单位显示。参数有 k 、K 、m 、M ，分别代表1000、1024、1000000、1048576字节（byte）。默认单位为K（1024 bytes）</td></tr> <tr><td>-V</td> <td>显示vmstat版本信息。</td></tr></tbody></table> <h3 id="_3-使用实例"><a href="#_3-使用实例" class="header-anchor">#</a> 3.使用实例：</h3> <h4 id="输出说明"><a href="#输出说明" class="header-anchor">#</a> 输出说明</h4> <table><thead><tr><th>信息</th> <th>含义</th></tr></thead> <tbody><tr><td>r</td> <td>运行队列中进程数量，这个值也可以判断是否需要增加CPU。（长期大于1）</td></tr> <tr><td>b</td> <td>等待IO的进程数量</td></tr> <tr><td>swpd</td> <td>使用虚拟内存大小。注意：如果swpd的值不为0，但是SI，SO的值长期为0，这种情况不会影响系统性能。</td></tr> <tr><td>free</td> <td>空闲物理内存大小</td></tr> <tr><td>buff</td> <td>用作缓冲的内存大小</td></tr> <tr><td>cache</td> <td>用作缓存的内存大小。注意：如果cache的值大的时候，说明cache处的文件数多，如果频繁访问到的文件都能被cache处，那么磁盘的读IO bi会非常小。</td></tr> <tr><td>si</td> <td>每秒从交换区写到内存的大小，由磁盘调入内存</td></tr> <tr><td>so</td> <td>每秒写入交换区的内存大小，由内存调入磁盘。注意：内存够用的时候，这2个值都是0，如果这2个值长期大于0时，系统性能会受到影响，磁盘IO和CPU资源都会被消耗。有些朋友看到空闲内存（free）很少的或接近于0时，就认为内存不够用了，不能光看这一点，还要结合si和so，如果free很少，但是si和so也很少（大多时候是0），那么不用担心，系统性能这时不会受到影响的。</td></tr> <tr><td>IO</td> <td>（现在的Linux版本块的大小为1kb）</td></tr> <tr><td>bi</td> <td>每秒读取的块数</td></tr> <tr><td>bo</td> <td>每秒写入的块数。注意：随机磁盘读写的时候，这2个值越大（如超出1024k)，能看到CPU在IO等待的值也会越大。</td></tr> <tr><td>in</td> <td>每秒中断数，包括时钟中断。</td></tr> <tr><td>cs</td> <td>每秒上下文切换数。注意：上面2个值越大，会看到由内核消耗的CPU时间会越大。</td></tr> <tr><td>us</td> <td>用户进程执行时间百分比(user time)。注意： us的值比较高时，说明用户进程消耗的CPU时间多，但是如果长期超50%的使用，那么我们就该考虑优化程序算法或者进行加速。</td></tr> <tr><td>sy</td> <td>内核系统进程执行时间百分比(system time)。注意：sy的值高时，说明系统内核消耗的CPU资源多，这并不是良性表现，我们应该检查原因。</td></tr> <tr><td>wa</td> <td>IO等待时间百分比。注意：wa的值高时，说明IO等待比较严重，这可能由于磁盘大量作随机访问造成，也有可能磁盘出现瓶颈（块操作）。</td></tr> <tr><td>id</td> <td>空闲时间百分比</td></tr></tbody></table></div> <footer class="page-edit"><!----> <!----></footer> <div class="page-nav"><p class="inner"><span class="prev">
+      ←
+      <a href="/operation/pidstat.html" class="prev">
+        pidstat命令
+      </a></span> <span class="next"><a href="/operation/iostat.html">
+        iostat命令
+      </a>
+      →
+    </span></p></div> </main></div><div class="global-ui"></div></div>
+    <script src="/assets/js/app.96bcb8ae.js" defer></script><script src="/assets/js/2.d90d4600.js" defer></script><script src="/assets/js/30.13e88a8c.js" defer></script>
+  </body>
+</html>

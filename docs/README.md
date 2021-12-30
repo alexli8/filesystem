@@ -3,7 +3,7 @@ home: true
 heroImage: logo.jpg
 heroText:  文件系统与优化
 tagline: 相关文档
-actionText: 快速阅读
+actionText: 开始阅读
 actionLink: /operation/
 # features:
 # - title: Lustre

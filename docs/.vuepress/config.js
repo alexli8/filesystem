@@ -13,11 +13,11 @@ module.exports = {
         sidebar: {
             '/lustre/': [
                 {
-                    title: "快速上手",
+                    title: "Lustre文件系统",
                     icon: "creative",
                     // prefix: "get-started/",
-                    collapsable: true,
-                    children: ["","intro", "one", "two"],
+                    // collapsable: true,
+                    children: ["","1", "2", "3","4"],
                   },
             ],
             '/operation/': [
@@ -26,7 +26,7 @@ module.exports = {
                   // icon: "creative",
                   // prefix: "get-started/",
                   // collapsable: true,
-                  children: ["","top", "ps","pidstat","vmstat","iostat","lsof","perf","strace","problem-cpu","problem-io"],
+                  children: ["","top", "ps","pidstat","vmstat","iostat","lsof","perf","problem-cpu","problem-io"],
                 },
           ],
         }
